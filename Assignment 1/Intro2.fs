@@ -23,7 +23,8 @@ let cvalue = lookup env "c";;
 type expr = 
   | CstI of int
   | Var of string
-  | Prim of string * expr * expr;;
+  | Prim of string * expr * expr
+  | If of expr * expr * expr;;
 
 let e1 = CstI 17;;
 
@@ -53,7 +54,9 @@ let rec eval e (env : (string * int) list) : int =
                              let two = eval e2 env
                              if one = two then 1
                              else 0
+    | If(e1, e2, e3) -> if eval e1 env = 0 then eval e3 env else eval e2 env
     | Prim _            -> failwith "unknown primitive";;
+
 
 // this is for 1.1.3
 let rec eval2 e (env : (string * int) list) : int =
@@ -71,6 +74,7 @@ let rec eval2 e (env : (string * int) list) : int =
             | "min" -> if i1 > i2 then i2 else i1
             | "==" -> if i1 = i2 then 1 else 0
             | _ -> failwith "unknown operator"
+    | If(e1, e2, e3) -> if eval2 e1 env = 0 then eval2 e3 env else eval2 e2 env
 
 (*
 Example expresion in the extended expression language using abstract syntax
