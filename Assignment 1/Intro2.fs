@@ -109,6 +109,14 @@ let rec differentiate (ae:aexpr) : aexpr = // 1.2.5
     | Mul(i1, i2) ->
         Add(Mul(differentiate i1, i2), Mul(i1, differentiate i2))
 
+// Test for 1.2.5 differentiate.
+let testdif1 : aexpr = differentiate (CstI 2) 
+let testdif2 : aexpr = differentiate (Var "x")
+let testdif3 : aexpr = differentiate (Add(CstI 3, Var "x"))
+let testdif4 : aexpr= differentiate (Mul(Var "x", Var "x"))
+
+
+
 let e1 = CstI 17;;
 
 let e2 = Prim("+", CstI 3, Var "a");;
