@@ -74,6 +74,8 @@ let test4 = Add(CstI 1, CstI 0) // test case
 
 let bad = Add(Var "x", Var "y")
 
+let bad2 = Add(CstI 0, CstI 0)
+
 let rec simplify2 (ae: aexpr) : aexpr = // 1.2.4 solution for the ambitious student
     match ae with
         | Add(i1, i2) -> 
