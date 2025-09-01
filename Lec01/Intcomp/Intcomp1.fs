@@ -10,7 +10,7 @@ module Intcomp1
 type expr = 
   | CstI of int
   | Var of string
-  | Let of string * expr * expr
+  | Let of (string * expr) list * expr // Changed to a list of bindings instead of a single binding
   | Prim of string * expr * expr;;
 
 (* Some closed expressions: *)
@@ -49,10 +49,19 @@ let rec eval e (env : (string * int) list) : int =
     match e with
     | CstI i            -> i
     | Var x             -> lookup env x 
-    | Let(x, erhs, ebody) -> 
-      let xval = eval erhs env
-      let env1 = (x, xval) :: env 
-      eval ebody env1
+    // | Let(x, erhs, ebody) -> 
+    //   let xval = eval erhs env
+    //   let env1 = (x, xval) :: env 
+    //   eval ebody env1
+    | Let(bindings, ebody) ->
+        let rec evalBindings bs env =     // recursive function to evaluate all bindings
+            match bs with // Match on the list of bindings
+            | [] -> env // If no bindings left, return the current environment
+            | (x, erhs) :: rest -> // Else split the first binding from the rest
+                let xval = eval erhs env // Evaluate the right-hand side expression of the binding
+                evalBindings rest ((x, xval) :: env) // Recursively evaluate remaining bindings with updated environment
+        let newEnv = evalBindings bindings env // Evaluate all bindings to get the new environment
+        eval ebody newEnv // Evaluate the body of the let expression in the new environment
     | Prim("+", e1, e2) -> eval e1 env + eval e2 env
     | Prim("*", e1, e2) -> eval e1 env * eval e2 env
     | Prim("-", e1, e2) -> eval e1 env - eval e2 env
@@ -61,6 +70,20 @@ let rec eval e (env : (string * int) list) : int =
 let run e = eval e [];;
 let res = List.map run [e1;e2;e3;e4;e5;e7]  (* e6 has free variables *)
 
+(* ---------------------------------------------------------------------- *)
+
+(* Tests for list of bindings *)
+// Test case 1: Simple sequential bindings
+let test1 = Let([("x1", CstI 5); ("x2", Prim("+", Var "x1", CstI 7))], Prim("+", Var "x1", Var "x2"))
+let result1 = run test1 // Expected: 5 + (5 + 7) = 17
+
+// Test case 2: Nested let-bindings
+let test2 = Let([("x1", CstI 3); ("x2", Let([("y", Prim("*", Var "x1", CstI 2))], Prim("+", Var "y", CstI 1)))], Prim("*", Var "x1", Var "x2"))
+let result2 = run test2 // Expected: 3 * ((3 * 2) + 1) = 21
+
+// Test case 3: Overwriting variables in sequential bindings
+let test3 = Let([("x", CstI 10); ("x", Prim("+", Var "x", CstI 5))], Prim("*", Var "x", CstI 2))
+let result3 = run test3 // Expected: (10 + 5) * 2 = 30
 
 (* ---------------------------------------------------------------------- *)
 
