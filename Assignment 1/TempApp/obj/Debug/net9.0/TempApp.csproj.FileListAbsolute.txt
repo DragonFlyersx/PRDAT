@@ -1,0 +1,15 @@
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\TempApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\TempApp.AssemblyInfoInputs.cache
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\TempApp.AssemblyInfo.cs
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\TempApp.csproj.CoreCompileInputs.cache
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\TempApp.sourcelink.json
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\bin\Debug\net9.0\TempApp.exe
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\bin\Debug\net9.0\TempApp.deps.json
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\bin\Debug\net9.0\TempApp.runtimeconfig.json
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\bin\Debug\net9.0\TempApp.dll
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\bin\Debug\net9.0\TempApp.pdb
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\TempApp.dll
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\refint\TempApp.dll
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\TempApp.pdb
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\TempApp.genruntimeconfig.cache
+C:\Users\mathi\Desktop\PRDAT\PRDAT\Assignment 1\TempApp\obj\Debug\net9.0\ref\TempApp.dll
