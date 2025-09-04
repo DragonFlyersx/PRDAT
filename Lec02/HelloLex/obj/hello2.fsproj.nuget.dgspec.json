@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Tipskind_Overkill\\Documents\\Repositorier\\PRDAT\\Lec02\\HelloLex\\hello2.fsproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Tipskind_Overkill\\Documents\\Repositorier\\PRDAT\\Lec02\\HelloLex\\hello2.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Tipskind_Overkill\\Documents\\Repositorier\\PRDAT\\Lec02\\HelloLex\\hello2.fsproj",
+        "projectName": "hello2",
+        "projectPath": "C:\\Users\\Tipskind_Overkill\\Documents\\Repositorier\\PRDAT\\Lec02\\HelloLex\\hello2.fsproj",
+        "packagesPath": "C:\\Users\\Tipskind_Overkill\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tipskind_Overkill\\Documents\\Repositorier\\PRDAT\\Lec02\\HelloLex\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Tipskind_Overkill\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files\\dotnet\\sdk\\9.0.304\\FSharp\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[9.0.303, )",
+              "generatePathProperty": true
+            },
+            "FsLexYacc.Runtime": {
+              "target": "Package",
+              "version": "[11.3.0, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
