@@ -45,7 +45,7 @@ let rec lookup env x =
     | []        -> failwith (x + " not found")
     | (y, v)::r -> if x=y then v else lookup r x;;
 
-let rec eval e (env : (string * int) list) : int =
+let rec eval e (env : (string * int) list) : int = // 2.1
     match e with
     | CstI i            -> i
     | Var x             -> lookup env x 
@@ -73,7 +73,7 @@ let res = List.map run [e1;e2;e3;e4;e5;e7]  (* e6 has free variables *)
 (* ---------------------------------------------------------------------- *)
 
 (* Tests for list of bindings *)
-// Test case 1: Simple sequential bindings
+// Test case 1: Netsted sequential bindings
 let test1 = Let([("x1", CstI 5); ("x2", Prim("+", Var "x1", CstI 7))], Prim("+", Var "x1", Var "x2"))
 let result1 = run test1 // Expected: 5 + (5 + 7) = 17
 
@@ -231,13 +231,41 @@ let rec minus (xs, ys) =
 
 (* Find all variables that occur free in expression e *)
 
-let rec freevars e : string list =
+let rec freevars e : string list = // 2.2
     match e with
     | CstI i -> []
     | Var x  -> [x]
-    | Let(x, erhs, ebody) -> 
-          union (freevars erhs, minus (freevars ebody, [x]))
-    | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
+    | Let(bindings, ebody) -> // x1 = x1 + 3 in x1 * x2 end
+        let boundVars = List.map fst bindings // Takes all variable names from bindings list
+        let freeRhs = List.fold (fun acc (_, eRHS) -> union (acc, freevars eRHS)) [] bindings // Needs to be a list of all free variable on the right hand side of the expresion before the body
+        let freeBody = minus (freevars ebody, boundVars) // Free vars in body minus bound vars
+        union (freeRhs, freeBody) // Union of free vars in RHS and body
+    | Prim(ope, e1, e2) -> union (freevars e1, freevars e2)
+
+// 1. No free variables (all bound)
+// expression: a = 1 in a + 2 end
+let ex1 = Let([("a", CstI 1)], Prim("+", Var "a", CstI 2)) 
+let fv1 = freevars ex1 // []
+
+// 2. Free variable in nested let
+// expression: a = 1 in b = a + c in b * a end end
+let ex2 = Let([("a", CstI 1)], Let([("b", Prim("+", Var "a", Var "c"))], Prim("*", Var "b", Var "a")))
+let fv2 = freevars ex2 // ["c"]
+
+// 3. Multiple free variables
+// expression: x + (y * z)
+let ex3 = Prim("+", Var "x", Prim("*", Var "y", Var "z"))
+let fv3 = freevars ex3 // ["x"; "y"; "z"]
+
+// 4. Free variable shadowed by let
+// expression: x = y in x + z end
+let ex4 = Let([("x", Var "y")], Prim("+", Var "x", Var "z"))
+let fv4 = freevars ex4 // ["y"; "z"]
+
+// 5. Deeply nested let with a free variables
+// expression: a = 1 in b = a in c = d in b + c end end end
+let ex5 = Let([("a", CstI 1)], Let([("b", Var "a")], Let([("c", Var "d")], Prim("+", Var "b", Var "c"))))
+let fv5 = freevars ex5 // ["d"]
 
 (* Alternative definition of closed *)
 
@@ -265,14 +293,21 @@ let rec getindex vs x =
 
 (* Compiling from expr to texpr *)
 
-let rec tcomp (e : expr) (cenv : string list) : texpr =
+let rec tcomp (e : expr) (cenv : string list) : texpr = // 2.3
     match e with
     | CstI i -> TCstI i
     | Var x  -> TVar (getindex cenv x)
-    | Let(x, erhs, ebody) -> 
-      let cenv1 = x :: cenv 
-      TLet(tcomp erhs cenv, tcomp ebody cenv1)
+    | Let(bindings, ebody) ->
+        match bindings with
+        | [] -> tcomp ebody cenv
+        | (x, erhs) :: bindings_tail ->
+            let cenv1 = x :: cenv
+            TLet(tcomp erhs cenv, tcomp (Let(bindings_tail, ebody)) cenv1)
     | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);;
+
+// 1. No free variables (all bound)
+let t1 = Let([("a", CstI 1)], Prim("+", Var "a", CstI 2))
+let tc1 = tcomp t1 [] // Expected: TLet(TCstI 1, TPrim("+", TVar 0, TCstI 2))
 
 (* Evaluation of target expressions with variable indexes.  The
    run-time environment renv is a list of variable values (ints).  *)
