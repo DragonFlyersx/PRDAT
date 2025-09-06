@@ -12,4 +12,9 @@
   <ItemGroup>
     <Reference Include="/Users/nh/fsharp/FsLexYacc.Runtime.dll" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FsLexYacc" Version="11.3.0" />
+    <PackageReference Include="FsLexYacc.Runtime" Version="11.3.0" />
+  </ItemGroup>
 </Project>
