@@ -329,7 +329,14 @@ let s3 = scomp e3 []
 
 
 (* Output the integers in list inss to the text file called fname: *)
-
 let intsToFile (inss : int list) (fname : string) = 
     let text = String.concat " " (List.map string inss)
     System.IO.File.WriteAllText(fname, text);;
+
+let compString (s : string) : sinstr list =
+    let e = Parse.fromString s in
+        if not (closed1 e) then 
+            raise (Failure "Not closed")
+        else
+            scomp e []
+    

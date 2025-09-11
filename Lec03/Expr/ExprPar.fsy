@@ -32,4 +32,6 @@ Expr:
   | Expr TIMES Expr                     { Prim("*", $1, $3) }
   | Expr PLUS  Expr                     { Prim("+", $1, $3) }  
   | Expr MINUS Expr                     { Prim("-", $1, $3) } 
+  | If Expr THEN Expr ELSE Expr         { IF($2, $4, $6) }
 ;
+    
