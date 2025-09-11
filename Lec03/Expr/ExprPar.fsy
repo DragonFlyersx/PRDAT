@@ -12,7 +12,10 @@
 %token END IN LET
 %token LPAR RPAR
 %token EOF
+%token IF THEN ELSE
 
+%left PLUS MINUS // Added after issue with precedence
+%left TIMES // Added after issue with precedence
 
 %start Main
 %type <Absyn.expr> Main 
