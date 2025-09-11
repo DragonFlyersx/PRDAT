@@ -10,17 +10,6 @@ Expr ::= NAME rule B
     
 Right most derivation of the input: let z = (17) in z + 2 * 3 end EOF 
 
-
-let z = ( 17 ) in z + 2 * 3 end EOF
-
-
-
-
-
-Dvs når vi right drivation så er det den mest højre non terminal symbol vi udvider først
-
-This is with respect to the grammar: And Right most derivation:
-
 Main 
 => Expr EOF (rule A)
 => LET NAME EQ Expr IN Expr END EOF (rule F)
@@ -31,6 +20,8 @@ Main
 => LET NAME EQ Expr IN NAME PLUS CSTINT TIMES CSTINT END EOF (rule B)
 => LET NAME EQ LPAR Expr RPAR IN NAME PLUS CSTINT TIMES CSTINT END EOF (rule E)
 => LET NAME EQ LPAR CSTINT RPAR IN NAME PLUS CSTINT TIMES CSTINT END EOF (rule C)
+With Terminal applied
+=> LET z EQ LPAR 17 RPAR IN z PLUS 2 TIMES 3 END EOF
 
 
 
