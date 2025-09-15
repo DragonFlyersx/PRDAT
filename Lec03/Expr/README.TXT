@@ -10,6 +10,8 @@ A. Generating and compiling the lexer and parser for the expression
    fsyacc --module ExprPar ExprPar.fsy
    fsharpi -r FsLexYacc.Runtime.dll Absyn.fs ExprPar.fs ExprLex.fs Parse.fs
 
+   dotnet fsi -r ~/fsharp/FsLexYacc.Runtime.dll Absyn.fs ExprPar.fs ExprLex.fs Parse.fs
+    
    open Parse;;
    fromString "2 + 3 * 4";;     
 

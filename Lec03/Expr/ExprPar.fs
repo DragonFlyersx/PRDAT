@@ -290,7 +290,7 @@ let _fsyacc_reductions = lazy [|
                 (
                    (
 # 38 "ExprPar.fsy"
-                                                               IF(_2, _4, _6) 
+                                                               If(_2, _4, _6) 
                    )
 # 38 "ExprPar.fsy"
                  : 'gentype_Expr));
