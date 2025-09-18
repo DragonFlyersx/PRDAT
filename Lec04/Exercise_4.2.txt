@@ -1,0 +1,37 @@
+Exersice 4.2                
+
+
+Write more example programs in the functional language, and test
+them in the same way as in Exercise 4.1:
+
+----------------------------------------------------------------------------------------------------------
+
+1) Compute the sum of the numbers from 1000 down to 1. Do this by defining a
+function sum n that computes the sum n+(n−1)+· · ·+2+1. (Use straightforward summation, no clever tricks.)
+
+ANSWER:
+run (fromString "let sum n = if n = 0 then 0 else n + sum(n-1) in sum 1000 end");;
+> val it: int = 500500
+
+----------------------------------------------------------------------------------------------------------
+    
+2) Compute the number 3^8, that is, 3 raised to the power 8. Again, use a recursive function.
+
+
+ANSWER:
+run (fromString "let power e = if e = 0 then 1 else 3 * power (e-1) in power 8 end");;
+3* 3 * 3 * 3 * 3 * 3 *3 * 3* 1
+
+----------------------------------------------------------------------------------------------------------
+   
+3) Compute 3^0 + 3^1 + · · · + 3^10 + 3^11, using a recursive function (or two, if you prefer).
+
+ANSWER:
+run (fromString "let sumpower e = if e = 0 then 1 else let power e = if e = 0 then 1 else 3 * power (e-1) in power e + sumpower (e-1) end in sumpower 11 end");;
+
+
+----------------------------------------------------------------------------------------------------------
+
+4) Compute 1^8 +2^8 +· · ·+10^8, again using a recursive function (or two).
+
+run (fromString "let powersum b = if b = 1 then 1 else let power e = if e = 0 then 1 else b * power (e-1) in power 8 + powersum (b-1) end in powersum 10 end");;
