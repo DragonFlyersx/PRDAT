@@ -43,6 +43,8 @@ rule Token = parse
   | "(*"            { commentStart := lexbuf.StartPos;
                       commentDepth := 1; 
                       SkipComment lexbuf; Token lexbuf }
+  | "&&"            { AND }
+  | "||"            { OR }
   | '='             { EQ }
   | "<>"            { NE }
   | '>'             { GT }

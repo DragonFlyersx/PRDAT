@@ -24,7 +24,7 @@ let rec lookup env x =
 
 type value = 
   | Int of int
-  | Closure of string * string * expr * value env       (* (f, x, fBody, fDeclEnv) *)
+  | Closure of string * string list * expr * value env       (* (f, [x], fBody, fDeclEnv) *)
 
 let rec eval (e : expr) (env : value env) : int =
     match e with 
@@ -52,17 +52,23 @@ let rec eval (e : expr) (env : value env) : int =
       let b = eval e1 env
       if b<>0 then eval e2 env
       else eval e3 env
-    | Letfun(f, x, fBody, letBody) -> 
-      let bodyEnv = (f, Closure(f, x, fBody, env)) :: env 
+    | Letfun(f, xs, fBody, letBody) -> // needs to take a list of parameters instead of a single parameter
+      let bodyEnv = (f, Closure(f, xs, fBody, env)) :: env  // let f [x1 x2] = fbody in letbody, let f x1 x2 = x1=3 og x2=4 in x1 + x2 some problem here,
       eval letBody bodyEnv
-    | Call(Var f, eArg) -> 
+
+    | Call(Var f, eArgs) ->  // call of expr * expr list. f er title på funktion, eArgs er listen af arguementer
       let fClosure = lookup env f
       match fClosure with
-      | Closure (f, x, fBody, fDeclEnv) ->
-        let xVal = Int(eval eArg env)
-        let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
+      | Closure (f, xs, fBody, fDeclEnv) ->
+
+        //let xVal = Int(eval eArg env) // one value
+        let listValues = List.map (fun eArg -> Int(eval eArg env)) eArgs // list of values
+        let paramBinding = List.zip xs listValues // Bind parameters to values like [(x1,v1);(x2,v2)]
+        let fBodyEnv = paramBinding @ f, fClosure(f,xs,fBody,fEnv) :: fDeclEnv // extend fDeclEnv with new bindings
         eval fBody fBodyEnv
+
       | _ -> failwith "eval Call: not a function"
+
     | Call _ -> failwith "eval Call: not first-order function"
 
 (* Evaluate in empty environment: program must have no free variables: *)
