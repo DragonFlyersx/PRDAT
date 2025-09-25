@@ -1,4 +1,3 @@
-module FunLex
 
 module FunLex
 open (*Microsoft.*)FSharp.Text.Lexing
