@@ -8,9 +8,8 @@ module Util
 
 let (!) (r: 'T ref)  = r.Value
 let (:=) (r: 'T ref) (v: 'T)  = r.Value <- v
-//let incr (r: int ref)  = r.Value <- r.Value + 1
-//let decr (r: int ref)  = r.Value <- r.Value - 1
 
+//Task 4.2
 
 let rec sum n =
    if n = 0 then 0
