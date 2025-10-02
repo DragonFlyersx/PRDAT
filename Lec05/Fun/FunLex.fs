@@ -33,9 +33,10 @@ let keyword s =
     | "not"   -> NOT
     | "then"  -> THEN
     | "true"  -> CSTBOOL true
+    | "fun"   -> FUN 
     | _       -> NAME s
 
-# 38 "FunLex.fs"
+# 39 "FunLex.fs"
 let trans : uint16[] array = 
     [| 
     (* State 0 *)
@@ -106,134 +107,134 @@ let rec _fslex_dummy () = _fslex_dummy()
 and Token  lexbuf =
   match _fslex_tables.Interpret(7,lexbuf) with
   | 0 -> ( 
-# 38 "FunLex.fsl"
+# 39 "FunLex.fsl"
                                      Token lexbuf 
-# 111 "FunLex.fs"
+# 112 "FunLex.fs"
           )
   | 1 -> ( 
-# 39 "FunLex.fsl"
+# 40 "FunLex.fsl"
                                      lexbuf.EndPos <- lexbuf.EndPos.NextLine; Token lexbuf 
-# 116 "FunLex.fs"
+# 117 "FunLex.fs"
           )
   | 2 -> ( 
-# 40 "FunLex.fsl"
+# 41 "FunLex.fsl"
                                      CSTINT (System.Int32.Parse (lexemeAsString lexbuf)) 
-# 121 "FunLex.fs"
+# 122 "FunLex.fs"
           )
   | 3 -> ( 
-# 42 "FunLex.fsl"
+# 43 "FunLex.fsl"
                                      keyword (lexemeAsString lexbuf) 
-# 126 "FunLex.fs"
+# 127 "FunLex.fs"
           )
   | 4 -> ( 
-# 43 "FunLex.fsl"
+# 44 "FunLex.fsl"
                                      commentStart := lexbuf.StartPos;
                                      commentDepth := 1; 
                                      SkipComment lexbuf; Token lexbuf 
-# 133 "FunLex.fs"
+# 134 "FunLex.fs"
           )
   | 5 -> ( 
-# 46 "FunLex.fsl"
+# 47 "FunLex.fsl"
                                      EQ 
-# 138 "FunLex.fs"
+# 139 "FunLex.fs"
           )
   | 6 -> ( 
-# 47 "FunLex.fsl"
+# 48 "FunLex.fsl"
                                      NE 
-# 143 "FunLex.fs"
+# 144 "FunLex.fs"
           )
   | 7 -> ( 
-# 48 "FunLex.fsl"
+# 49 "FunLex.fsl"
                                      GT 
-# 148 "FunLex.fs"
+# 149 "FunLex.fs"
           )
   | 8 -> ( 
-# 49 "FunLex.fsl"
+# 50 "FunLex.fsl"
                                      LT 
-# 153 "FunLex.fs"
+# 154 "FunLex.fs"
           )
   | 9 -> ( 
-# 50 "FunLex.fsl"
+# 51 "FunLex.fsl"
                                      GE 
-# 158 "FunLex.fs"
+# 159 "FunLex.fs"
           )
   | 10 -> ( 
-# 51 "FunLex.fsl"
+# 52 "FunLex.fsl"
                                      LE 
-# 163 "FunLex.fs"
+# 164 "FunLex.fs"
           )
   | 11 -> ( 
-# 52 "FunLex.fsl"
+# 53 "FunLex.fsl"
                                      PLUS 
-# 168 "FunLex.fs"
+# 169 "FunLex.fs"
           )
   | 12 -> ( 
-# 53 "FunLex.fsl"
+# 54 "FunLex.fsl"
                                      MINUS 
-# 173 "FunLex.fs"
+# 174 "FunLex.fs"
           )
   | 13 -> ( 
-# 54 "FunLex.fsl"
+# 55 "FunLex.fsl"
                                      TIMES 
-# 178 "FunLex.fs"
+# 179 "FunLex.fs"
           )
   | 14 -> ( 
-# 55 "FunLex.fsl"
+# 56 "FunLex.fsl"
                                      DIV 
-# 183 "FunLex.fs"
+# 184 "FunLex.fs"
           )
   | 15 -> ( 
-# 56 "FunLex.fsl"
+# 57 "FunLex.fsl"
                                      MOD 
-# 188 "FunLex.fs"
+# 189 "FunLex.fs"
           )
   | 16 -> ( 
-# 57 "FunLex.fsl"
+# 58 "FunLex.fsl"
                                      LPAR 
-# 193 "FunLex.fs"
+# 194 "FunLex.fs"
           )
   | 17 -> ( 
-# 58 "FunLex.fsl"
+# 59 "FunLex.fsl"
                                      RPAR 
-# 198 "FunLex.fs"
+# 199 "FunLex.fs"
           )
   | 18 -> ( 
-# 59 "FunLex.fsl"
+# 60 "FunLex.fsl"
                                      EOF 
-# 203 "FunLex.fs"
+# 204 "FunLex.fs"
           )
   | 19 -> ( 
-# 60 "FunLex.fsl"
+# 61 "FunLex.fsl"
                                      failwith "Lexer error: illegal symbol" 
-# 208 "FunLex.fs"
+# 209 "FunLex.fs"
           )
   | _ -> failwith "Token"
 // Rule SkipComment
 and SkipComment  lexbuf =
   match _fslex_tables.Interpret(0,lexbuf) with
   | 0 -> ( 
-# 63 "FunLex.fsl"
+# 64 "FunLex.fsl"
                                      commentDepth := !commentDepth - 1;  
                                      if !commentDepth = 0 then ()
                                      else SkipComment lexbuf 
                                    
-# 220 "FunLex.fs"
+# 221 "FunLex.fs"
           )
   | 1 -> ( 
-# 67 "FunLex.fsl"
+# 68 "FunLex.fsl"
                                      commentDepth := !commentDepth + 1; 
                                      SkipComment lexbuf 
-# 226 "FunLex.fs"
+# 227 "FunLex.fs"
           )
   | 2 -> ( 
-# 69 "FunLex.fsl"
+# 70 "FunLex.fsl"
                                      failwith "Lexer error: unterminated comment" 
-# 231 "FunLex.fs"
+# 232 "FunLex.fs"
           )
   | 3 -> ( 
-# 70 "FunLex.fsl"
+# 71 "FunLex.fsl"
                                      SkipComment lexbuf 
-# 236 "FunLex.fs"
+# 237 "FunLex.fs"
           )
   | _ -> failwith "SkipComment"
 

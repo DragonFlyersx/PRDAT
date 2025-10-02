@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MergeCSharp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f40266f456544be4294325daab5540bb756bf6e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c7cc89f5302ac39179b11ba440786f73b2fb834")]
 [assembly: System.Reflection.AssemblyProductAttribute("MergeCSharp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MergeCSharp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

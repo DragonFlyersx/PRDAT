@@ -23,6 +23,15 @@ public class merge
 
             k++;
         }
+        while (i < n)
+        {
+            zs[k++] = xs[i++];
+        }
+
+        while (j < m)
+        {
+            zs[k++] = ys[j++];
+        }
     }
 
 

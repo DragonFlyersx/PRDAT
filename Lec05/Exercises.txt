@@ -1,0 +1,92 @@
+
+EXERCISE 6.1
+
+// Example 1
+let add x = let f y = x+y in f end
+in add 2 5 end
+
+run (fromString @"let add x = let f y = x+y in f end in add 2 5 end");;
+
+RESULT: Int 7
+
+// Example 2
+let add x = let f y = x+y in f end
+in let addtwo = add 2
+    in addtwo 5 end
+end
+
+run (fromString @"let add x = let f y = x+y in f end in let addtwo = add 2 in addtwo 5 end end");;
+
+RESULT: Int 7
+
+// Example 3
+let add x = let f y = x+y in f end
+in let addtwo = add 2
+    in let x = 77 in addtwo 5 end
+    end
+end
+
+run (fromString @"let add x = let f y = x+y in f end in let addtwo = add 2 in let x = 77 in addtwo 5 end end end");;
+
+RESULT: Int 7
+
+// Example 4
+let add x = let f y = x+y in f end
+in add 2 end
+
+run (fromString @"let add x = let f y = x+y in f end in add 2 end");;
+
+RESULT: 
+Closure
+    ("f", "y", Prim ("+", Var "x", Var "y"),
+     [("x", Int 2);
+      ("add",
+       Closure
+         ("add", "x", Letfun ("f", "y", Prim ("+", Var "x", Var "y"), Var "f"),
+          []))])
+          
+QUESTIONS FOR 6.1
+
+Q: Is the result of the third one as expected? 
+A: No becauses x's value is 77 in the inner let, but the function addtwo still uses the x from its defining environment, which is 2. and ignore the inner x.
+
+Q: Explain the result of the last one
+A: The result is a closure because add 2 return the function f, which adds x and y, but does not apply it to any argument. This shows that evaluating add 2 produces a function waiting for its argument, along with the environment needed to compute its result later.
+
+EXERCISE 6.5
+1)
+Command: run (fromString @"let f x = 1 in f f end");;
+Result: Int 1
+Type: Not typable
+Explanation: f is applied to itself, so f must accept a function as an argument. 
+But f is defined as f x = 1, so its argument can be of any type, but it always returns an int. 
+This leads to a type equation T = T -> int, which cannot be solved (infinite type).
+
+2)
+Command: run (fromString @"let f g = g g in f end");;
+Result: Closure ("f", "g", Call (Var "g", Var "g"), [])
+Type: Not typable
+Explanation: Explanation: g is applied to itself, so g must be a function that takes 
+itself as an argument: g : T -> T, but also g : T. This again leads to an infinite type.
+
+3)
+Command: run (fromString @"let f x = let g y = y in g false end in f 42 end");;
+Result: Int 0
+Type: int -> bool
+Explanation: f takes an int (42), but ignores it. g is the identity function, 
+so (g false) returns false (a bool). Therefore, f is a function from int to bool.
+
+4)
+Command: run (fromString @"let f x = let g y = if true then y else x in g false end in f 42 end");;
+Result: Int 0
+Type: int -> bool
+Explanation: g takes y, and returns either y or x. Since g is called with false, 
+y is bool, so x must also be bool. But f is called with 42 (an int), so this is a 
+type error. However, if the implementation coerces int to bool (e.g., 0 as false), 
+it may return bool. In strict micro-ML, this is not typable.
+
+5)
+Command: run (fromString @"let f x = let g y = if true then y else x in g false end in f true end");;
+Result: Int 0
+Type: bool -> bool
+Explanation: Both x and y are bool, so f is a function from bool to bool.
