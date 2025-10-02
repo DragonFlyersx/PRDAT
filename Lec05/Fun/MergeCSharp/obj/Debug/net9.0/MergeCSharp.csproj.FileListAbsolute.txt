@@ -1,0 +1,15 @@
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\MergeCSharp.GeneratedMSBuildEditorConfig.editorconfig
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\MergeCSharp.AssemblyInfoInputs.cache
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\MergeCSharp.AssemblyInfo.cs
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\MergeCSharp.csproj.CoreCompileInputs.cache
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\MergeCSharp.sourcelink.json
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\bin\Debug\net9.0\MergeCSharp.exe
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\bin\Debug\net9.0\MergeCSharp.deps.json
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\bin\Debug\net9.0\MergeCSharp.runtimeconfig.json
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\bin\Debug\net9.0\MergeCSharp.dll
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\bin\Debug\net9.0\MergeCSharp.pdb
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\MergeCSharp.dll
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\refint\MergeCSharp.dll
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\MergeCSharp.pdb
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\MergeCSharp.genruntimeconfig.cache
+F:\Udvikling\PRDAT\Lec05\Fun\MergeCSharp\obj\Debug\net9.0\ref\MergeCSharp.dll
