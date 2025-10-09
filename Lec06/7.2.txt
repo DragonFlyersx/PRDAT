@@ -1,0 +1,14 @@
+﻿We have created 3 of our own examples:
+- 7.2_example1_fib.c
+- 7.2_example2_div.c
+- 7.2_example3_mul.c
+
+We have created the 3 examples from the assignment:
+- 7.2_i.c
+- 7.2_ii.c
+- 7.2_iii.c
+
+For 7.2_iii.c: 
+If 'freq' has fewer than 4 elements, the program can overwrite other memory, crash the program or produce other incorrect results.
+Arrays must be defined allocated in the main function and passed to histogram, because C does not allow
+returning stack-allocated arrays from a function. If it is declared within the historgram function it will create a local array inside the function that means main wouldnt be able to access it
