@@ -1,0 +1,4 @@
+﻿We have created the 3 examples from the assignment:
+- 7.3_i.c
+- 7.3_ii.c
+- 7.3_iii.c

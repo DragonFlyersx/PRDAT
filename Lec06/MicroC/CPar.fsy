@@ -100,7 +100,7 @@ StmtM:  /* No unbalanced if-else */
   | Block                               { $1                   }
   | IF LPAR Expr RPAR StmtM ELSE StmtM  { If($3, $5, $7)       }
   | WHILE LPAR Expr RPAR StmtM          { While($3, $5)        }
-  | FOR LPAR Expr SEMI Expr SEMI Expr RPAR StmtM 
+  | FOR LPAR Expr SEMI Expr SEMI Expr RPAR StmtM
     { Block [
         Stmt(Expr($3));
         Stmt(While($5, Block [
@@ -141,6 +141,8 @@ ExprNotAccess:
   | Expr LE    Expr                     { Prim2("<=", $1, $3) }
   | Expr SEQAND Expr                    { Andalso($1, $3)     }
   | Expr SEQOR  Expr                    { Orelse($1, $3)      }
+  | PLUS PLUS Access                 { PreInc($3)          }
+  | MINUS MINUS Access               { PreDec($3)          }
 ;
 
 AtExprNotAccess:
