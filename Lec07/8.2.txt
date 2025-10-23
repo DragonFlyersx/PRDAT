@@ -1,0 +1,81 @@
+> compileToFile (fromFile "7.2_i.c") "7.2_i.out";;
+val it: Machine.instr list =
+  [LDARGS; CALL (0, "L2"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 3; ADD;
+   CSTI 0; STI; INCSP -1; GETBP; CSTI 2; ADD; LDI; CSTI 0; STI; INCSP -1;
+   GOTO "L4"; Label "L3"; GETBP; CSTI 2; ADD; LDI; GETBP; CSTI 2; ADD; LDI;
+   LDI; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 3; ADD; LDI; ADD; LDI; ADD; STI;
+   INCSP -1; GETBP; CSTI 3; ADD; GETBP; CSTI 3; ADD; LDI; CSTI 1; ADD; STI;
+   INCSP -1; INCSP 0; Label "L4"; GETBP; CSTI 3; ADD; LDI; GETBP; CSTI 0; ADD;
+   LDI; LT; IFNZRO "L3"; INCSP -1; RET 2; Label "L2"; INCSP 4; GETSP; CSTI 3;
+   SUB; INCSP 1; INCSP 1; GETBP; CSTI 4; ADD; LDI; CSTI 0; ADD; CSTI 7; STI;
+   INCSP -1; GETBP; CSTI 4; ADD; LDI; CSTI 1; ADD; CSTI 13; STI; INCSP -1;
+   GETBP; CSTI 4; ADD; LDI; CSTI 2; ADD; CSTI 9; STI; ...]
+
+> compile "7.2_i";;                                   
+val it: Machine.instr list =
+  [LDARGS; CALL (0, "L2"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 3; ADD;
+   CSTI 0; STI; INCSP -1; GETBP; CSTI 2; ADD; LDI; CSTI 0; STI; INCSP -1;
+   GOTO "L4"; Label "L3"; GETBP; CSTI 2; ADD; LDI; GETBP; CSTI 2; ADD; LDI;
+   LDI; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 3; ADD; LDI; ADD; LDI; ADD; STI;
+   INCSP -1; GETBP; CSTI 3; ADD; GETBP; CSTI 3; ADD; LDI; CSTI 1; ADD; STI;
+   INCSP -1; INCSP 0; Label "L4"; GETBP; CSTI 3; ADD; LDI; GETBP; CSTI 0; ADD;
+   LDI; LT; IFNZRO "L3"; INCSP -1; RET 2; Label "L2"; INCSP 4; GETSP; CSTI 3;
+   SUB; INCSP 1; INCSP 1; GETBP; CSTI 4; ADD; LDI; CSTI 0; ADD; CSTI 7; STI;
+   INCSP -1; GETBP; CSTI 4; ADD; LDI; CSTI 1; ADD; CSTI 13; STI; INCSP -1;
+   GETBP; CSTI 4; ADD; LDI; CSTI 2; ADD; CSTI 9; STI; ...]
+
+--------------------------------------------------------------------------------------------------------
+
+> compileToFile (fromFile "7.2_ii.c") "7.2_ii.out";;
+val it: Machine.instr list =
+  [LDARGS; CALL (1, "L3"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 2; ADD;
+   CSTI 0; STI; INCSP -1; GOTO "L5"; Label "L4"; GETBP; CSTI 1; ADD; LDI;
+   GETBP; CSTI 2; ADD; LDI; ADD; GETBP; CSTI 2; ADD; LDI; GETBP; CSTI 2; ADD;
+   LDI; MUL; STI; INCSP -1; GETBP; CSTI 2; ADD; GETBP; CSTI 2; ADD; LDI;
+   CSTI 1; ADD; STI; INCSP -1; INCSP 0; Label "L5"; GETBP; CSTI 2; ADD; LDI;
+   GETBP; CSTI 0; ADD; LDI; LT; IFNZRO "L4"; INCSP -1; RET 1; Label "L2";
+   INCSP 1; GETBP; CSTI 3; ADD; CSTI 0; STI; INCSP -1; GETBP; CSTI 2; ADD; LDI;
+   CSTI 0; STI; INCSP -1; GOTO "L7"; Label "L6"; GETBP; CSTI 2; ADD; LDI;
+   GETBP; CSTI 2; ADD; LDI; LDI; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 3; ADD;
+   LDI; ADD; LDI; ADD; STI; INCSP -1; GETBP; CSTI 3; ADD; ...]
+   
+> compile "7.2_ii";;
+val it: Machine.instr list =
+  [LDARGS; CALL (1, "L3"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 2; ADD;
+   CSTI 0; STI; INCSP -1; GOTO "L5"; Label "L4"; GETBP; CSTI 1; ADD; LDI;
+   GETBP; CSTI 2; ADD; LDI; ADD; GETBP; CSTI 2; ADD; LDI; GETBP; CSTI 2; ADD;
+   LDI; MUL; STI; INCSP -1; GETBP; CSTI 2; ADD; GETBP; CSTI 2; ADD; LDI;
+   CSTI 1; ADD; STI; INCSP -1; INCSP 0; Label "L5"; GETBP; CSTI 2; ADD; LDI;
+   GETBP; CSTI 0; ADD; LDI; LT; IFNZRO "L4"; INCSP -1; RET 1; Label "L2";
+   INCSP 1; GETBP; CSTI 3; ADD; CSTI 0; STI; INCSP -1; GETBP; CSTI 2; ADD; LDI;
+   CSTI 0; STI; INCSP -1; GOTO "L7"; Label "L6"; GETBP; CSTI 2; ADD; LDI;
+   GETBP; CSTI 2; ADD; LDI; LDI; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 3; ADD;
+   LDI; ADD; LDI; ADD; STI; INCSP -1; GETBP; CSTI 3; ADD; ...]
+
+--------------------------------------------------------------------------------------------------------
+
+> compileToFile (fromFile "7.2_iii.c") "7.2_iii.out";;
+val it: Machine.instr list =
+  [LDARGS; CALL (0, "L2"); STOP; Label "L1"; INCSP 1; INCSP 1; GETBP; CSTI 4;
+   ADD; CSTI 0; STI; INCSP -1; GOTO "L4"; Label "L3"; GETBP; CSTI 3; ADD; LDI;
+   GETBP; CSTI 4; ADD; LDI; ADD; CSTI 0; STI; INCSP -1; GETBP; CSTI 4; ADD;
+   GETBP; CSTI 4; ADD; LDI; CSTI 1; ADD; STI; INCSP -1; INCSP 0; Label "L4";
+   GETBP; CSTI 4; ADD; LDI; GETBP; CSTI 2; ADD; LDI; SWAP; LT; NOT;
+   IFNZRO "L3"; GETBP; CSTI 4; ADD; CSTI 0; STI; INCSP -1; GOTO "L6";
+   Label "L5"; GETBP; CSTI 5; ADD; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 4; ADD;
+   LDI; ADD; LDI; STI; INCSP -1; GETBP; CSTI 3; ADD; LDI; GETBP; CSTI 5; ADD;
+   LDI; ADD; GETBP; CSTI 3; ADD; LDI; GETBP; CSTI 5; ADD; LDI; ADD; LDI;
+   CSTI 1; ADD; STI; INCSP -1; GETBP; CSTI 4; ADD; ...]
+   
+> compile "7.2_iii";;
+val it: Machine.instr list =
+  [LDARGS; CALL (0, "L2"); STOP; Label "L1"; INCSP 1; INCSP 1; GETBP; CSTI 4;
+   ADD; CSTI 0; STI; INCSP -1; GOTO "L4"; Label "L3"; GETBP; CSTI 3; ADD; LDI;
+   GETBP; CSTI 4; ADD; LDI; ADD; CSTI 0; STI; INCSP -1; GETBP; CSTI 4; ADD;
+   GETBP; CSTI 4; ADD; LDI; CSTI 1; ADD; STI; INCSP -1; INCSP 0; Label "L4";
+   GETBP; CSTI 4; ADD; LDI; GETBP; CSTI 2; ADD; LDI; SWAP; LT; NOT;
+   IFNZRO "L3"; GETBP; CSTI 4; ADD; CSTI 0; STI; INCSP -1; GOTO "L6";
+   Label "L5"; GETBP; CSTI 5; ADD; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 4; ADD;
+   LDI; ADD; LDI; STI; INCSP -1; GETBP; CSTI 3; ADD; LDI; GETBP; CSTI 5; ADD;
+   LDI; ADD; GETBP; CSTI 3; ADD; LDI; GETBP; CSTI 5; ADD; LDI; ADD; LDI;
+   CSTI 1; ADD; STI; INCSP -1; GETBP; CSTI 4; ADD; ...]

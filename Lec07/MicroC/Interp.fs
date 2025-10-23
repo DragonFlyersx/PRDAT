@@ -151,13 +151,29 @@ and stmtordec stmtordec locEnv gloEnv store =
 
 (* Evaluating micro-C expressions *)
 
-and eval e locEnv gloEnv store : int * store = 
+and eval e locEnv gloEnv store : int * store = //getSto and setSto Store
   match e with
     | Access acc     -> let (loc, store1) = access acc locEnv gloEnv store
                         (getSto store1 loc, store1) 
     | Assign(acc, e) -> let (loc, store1) = access acc locEnv gloEnv store
                         let (res, store2) = eval e locEnv gloEnv store1
                         (res, setSto store2 loc res) 
+
+    | PreInc acc     ->
+    // Get the location of the variable
+                        let (loc, store1) = access acc locEnv gloEnv store
+                        // Read current value
+                        let v = getSto store1 loc
+                        // Increment
+                        let res = v + 1
+                        // Update store
+                        (res, setSto store1 loc res)
+    | PreDec acc     ->
+                        let (loc, store1) = access acc locEnv gloEnv store
+                        let v = getSto store1 loc
+                        let res = v - 1
+                        (res, setSto store1 loc res)
+
     | CstI i         -> (i, store)
     | Addr acc       -> access acc locEnv gloEnv store
     | Prim1(ope, e1) ->

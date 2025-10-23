@@ -1,0 +1,87 @@
+> compileToFile (fromFile "ex8.c") "ex8.out";;                  
+val it: Machine.instr list =
+  [LDARGS; CALL (0, "L1"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 0; ADD;
+   CSTI 20000000; STI; INCSP -1; GOTO "L3"; Label "L2"; GETBP; CSTI 0; ADD;
+   GETBP; CSTI 0; ADD; LDI; CSTI 1; SUB; STI; INCSP -1; INCSP 0; Label "L3";
+   GETBP; CSTI 0; ADD; LDI; IFNZRO "L2"; INCSP -1; RET -1]
+
+> compile "ex8";;                             
+val it: Machine.instr list =
+  [LDARGS; CALL (0, "L1"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 0; ADD;
+   CSTI 20000000; STI; INCSP -1; GOTO "L3"; Label "L2"; GETBP; CSTI 0; ADD;
+   GETBP; CSTI 0; ADD; LDI; CSTI 1; SUB; STI; INCSP -1; INCSP 0; Label "L3";
+   GETBP; CSTI 0; ADD; LDI; IFNZRO "L2"; INCSP -1; RET -1]
+
+Why is it slower/iefficient than the handwritten one in prog1?
+
+ex8.out: 24 19 0 5 25 15 1 13 0 0 1 0 20000000 12 15 -1 16 35 13 0 0 1 13 0 0 1 11 0 1 2 12 15 -1 15 0 13 0 0 1 11 18 18 15 -1 21 -1
+prog1: 0 20000000 16 7 0 1 2 9 18 4 25
+
+prog1:
+0 20000000 = CSINTI 20000000
+16 7 = GOTO 7
+0 1 = CSTI 1
+2 = SUB
+9 = DUP
+18 = IFNZRO
+4 = GOTO 4
+25 = STOP
+
+pseudo code for prog1:
+int i = 20000000;
+while (i > 0) {
+    i = i - 1;
+}
+
+ANSWER:
+Each variable access requires 3 instructions (GETBP, CSTI 0, ADD) to calculate the address and then LDI/STI to read or write. This happens 3 times per iteration.
+prog1 keeps the counter on the stack and uses DUP to update it. 
+ex8.out treats it as a memory variable requiring constant address recalculation.
+
+prog1: ~10 instructions total
+ex8.out: ~20 instructions per iteration
+
+
+--------------------------------------------------------------------------------------------------
+
+> compileToFile (fromFile "ex13.c") "ex13.out";;
+val it: Machine.instr list =
+  [LDARGS; CALL (1, "L1"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 1; ADD;
+   CSTI 1889; STI; INCSP -1; GOTO "L3"; Label "L2"; GETBP; CSTI 1; ADD; GETBP;
+   CSTI 1; ADD; LDI; CSTI 1; ADD; STI; INCSP -1; GETBP; CSTI 1; ADD; LDI;
+   CSTI 4; MOD; CSTI 0; EQ; IFZERO "L7"; GETBP; CSTI 1; ADD; LDI; CSTI 100;
+   MOD; CSTI 0; EQ; NOT; IFNZRO "L9"; GETBP; CSTI 1; ADD; LDI; CSTI 400; MOD;
+   CSTI 0; EQ; GOTO "L8"; Label "L9"; CSTI 1; Label "L8"; GOTO "L6";
+   Label "L7"; CSTI 0; Label "L6"; IFZERO "L4"; GETBP; CSTI 1; ADD; LDI;
+   PRINTI; INCSP -1; GOTO "L5"; Label "L4"; INCSP 0; Label "L5"; INCSP 0;
+   Label "L3"; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 0; ADD; LDI; LT;
+   IFNZRO "L2"; INCSP -1; RET 0]
+
+> compile "ex13";;                              
+val it: Machine.instr list =
+  [LDARGS; CALL (1, "L1"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 1; ADD;
+   CSTI 1889; STI; INCSP -1; GOTO "L3"; Label "L2"; GETBP; CSTI 1; ADD; GETBP;
+   CSTI 1; ADD; LDI; CSTI 1; ADD; STI; INCSP -1; GETBP; CSTI 1; ADD; LDI;
+   CSTI 4; MOD; CSTI 0; EQ; IFZERO "L7"; GETBP; CSTI 1; ADD; LDI; CSTI 100;
+   MOD; CSTI 0; EQ; NOT; IFNZRO "L9"; GETBP; CSTI 1; ADD; LDI; CSTI 400; MOD;
+   CSTI 0; EQ; GOTO "L8"; Label "L9"; CSTI 1; Label "L8"; GOTO "L6";
+   Label "L7"; CSTI 0; Label "L6"; IFZERO "L4"; GETBP; CSTI 1; ADD; LDI;
+   PRINTI; INCSP -1; GOTO "L5"; Label "L4"; INCSP 0; Label "L5"; INCSP 0;
+   Label "L3"; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 0; ADD; LDI; LT;
+   IFNZRO "L2"; INCSP -1; RET 0]
+   
+ANSWER:
+
+---- Loop ----
+The loop uses a while loop with jumps backwards jump
+GOTO "L3" Jumps to loop condition
+Label "L3" is the start of the condition evaluation
+IFNZRO "L2" if true it jumps back to label "L2" which is the start of the loop body
+
+---- Conditionals ----
+GETBP; CSTI 1; ADD; LDI; CSTI 4; MOD; CSTI 0; EQ; IFZERO "L7" - If false push 0 and jump to Label "L7"
+GETBP; CSTI 1; ADD; LDI; CSTI 100; MOD; CSTI 0; EQ; NOT; IFNZRO "L9" If true push 1 and jump to Label "L9"
+GETBP; CSTI 1; ADD; LDI; CSTI 400; MOD; CSTI 0; EQ; GOTO "L8" Doesnt push anything?
+
+If leap year result is true, print year.
+Otherwise jump to Label "L4" (skip printing).
