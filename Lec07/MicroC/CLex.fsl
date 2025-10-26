@@ -60,6 +60,8 @@ rule Token = parse
   | "!="            { NE }
   | '>'             { GT }
   | '<'             { LT }
+  | '?'             { COND }
+  | ':'             { COLON }
   | ">="            { GE }
   | "<="            { LE }
   | "||"            { SEQOR }                     
