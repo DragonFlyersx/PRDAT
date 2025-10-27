@@ -20,10 +20,12 @@ let nl = CstI 10
 %token NOT SEQOR SEQAND
 %token LPAR RPAR LBRACE RBRACE LBRACK RBRACK SEMI COMMA ASSIGN AMP
 %token COND COLON
+%token SWITCH
+%token CASE
 %token EOF
 
 %right ASSIGN             /* lowest precedence */
-%right COND COLON
+%right COND
 %nonassoc PRINT
 %left SEQOR
 %left SEQAND
@@ -110,6 +112,8 @@ StmtM:  /* No unbalanced if-else */
             Stmt(Expr($7))
         ]))
       ] }
+  | SWITCH LPAR Expr RPAR LBRACE Cases RBRACE
+                                        { Switch($3, $6) }
 ;
 
 StmtU:
@@ -182,4 +186,13 @@ Const:
 Type:
     INT                                 { TypI     }
   | CHAR                                { TypC     }
+;
+
+Cases:
+    CaseClause                          { [$1]     }
+  | CaseClause Cases                    { $1 :: $2 }
+;
+
+CaseClause:
+    CASE Const COLON Block              { ($2, $4) }
 ;

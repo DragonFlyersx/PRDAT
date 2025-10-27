@@ -144,6 +144,27 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       [RET (snd varEnv - 1)]
     | Return (Some e) -> 
       cExpr e varEnv funEnv @ [RET (snd varEnv)]
+    | Switch (e, cases) ->
+      let labEnd = newLabel()
+      let codeEval = cExpr e varEnv funEnv
+
+      let caseLabels = List.map (fun _ -> newLabel()) cases
+
+      let testCode =
+        List.zip cases caseLabels
+        |> List.collect (fun ((constVal, _), lbl) ->
+            [DUP; CSTI constVal; EQ; IFNZRO lbl]
+        )
+
+      let preBodies = [INCSP -1; GOTO labEnd]
+
+      let bodyCode =
+        List.zip cases caseLabels
+        |> List.collect (fun ((_, stmt), lbl) ->
+            [Label lbl] @ cStmt stmt varEnv funEnv @ [GOTO labEnd]
+        )
+
+      codeEval @ testCode @ preBodies @ bodyCode @ [Label labEnd]
 
 and cStmtOrDec stmtOrDec (varEnv : varEnv) (funEnv : funEnv) : varEnv * instr list = 
     match stmtOrDec with 

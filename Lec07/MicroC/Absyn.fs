@@ -39,6 +39,7 @@ and stmt =
   | Return of expr option            (* Return from method          *)
   | Block of stmtordec list          (* Block: grouping and scope   *)
   | For of expr * expr * expr * stmt (* For loop                    *)
+  | Switch of expr * (int * stmt) list (* Switch statement          *)
                                                                    
 and stmtordec =                                                    
   | Dec of typ * string              (* Local variable declaration  *)

@@ -1,0 +1,49 @@
+﻿Updated the lexer, parser, abstract syntax and compiler to implement
+switch statements.
+
+Lexer:
+    | "switch"  -> SWITCH
+    | "case"    -> CASE
+    
+Parser:
+%token SWITCH
+%token CASE
+
+      | SWITCH LPAR Expr RPAR LBRACE Cases RBRACE
+                                        { Switch($3, $6) }
+                                        
+    Cases:
+        CaseClause                          { [$1]     }
+      | CaseClause Cases                    { $1 :: $2 }
+    ;
+    
+    CaseClause:
+        CASE Const COLON Block              { ($2, $4) }
+    ;
+
+Abtract Syntax:
+    | Switch of expr * (int * stmt) list (* Switch statement          *)
+  
+  
+Compiler:
+    | Switch (e, cases) ->
+          let labEnd = newLabel()
+          let codeEval = cExpr e varEnv funEnv
+    
+          let caseLabels = List.map (fun _ -> newLabel()) cases
+    
+          let testCode =
+            List.zip cases caseLabels
+            |> List.collect (fun ((constVal, _), lbl) ->
+                [DUP; CSTI constVal; EQ; IFNZRO lbl]
+            )
+    
+          let preBodies = [INCSP -1; GOTO labEnd]
+    
+          let bodyCode =
+            List.zip cases caseLabels
+            |> List.collect (fun ((_, stmt), lbl) ->
+                [Label lbl] @ cStmt stmt varEnv funEnv @ [GOTO labEnd]
+            )
+    
+          codeEval @ testCode @ preBodies @ bodyCode @ [Label labEnd]
