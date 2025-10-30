@@ -1,0 +1,14 @@
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/bin/Debug/net8.0/Ex13
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/bin/Debug/net8.0/Ex13.deps.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/bin/Debug/net8.0/Ex13.runtimeconfig.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/bin/Debug/net8.0/Ex13.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/bin/Debug/net8.0/Ex13.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/Ex13.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/Ex13.AssemblyInfoInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/Ex13.AssemblyInfo.cs
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/Ex13.csproj.CoreCompileInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/Ex13.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/refint/Ex13.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/Ex13.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/Ex13.genruntimeconfig.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Ex13/obj/Debug/net8.0/ref/Ex13.dll
