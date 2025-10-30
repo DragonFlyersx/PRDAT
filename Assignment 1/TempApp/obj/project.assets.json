@@ -8,25 +8,24 @@
     "net9.0": []
   },
   "packageFolders": {
-    "/home/matt/.nuget/packages/": {}
+    "C:\\Users\\Tipskind_Overkill\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/matt/DEV/PRDAT/Assignment 1/TempApp/TempApp.csproj",
+      "projectUniqueName": "C:\\Users\\Tipskind_Overkill\\Documents\\Repositorier\\PRDAT\\Assignment 1\\TempApp\\TempApp.csproj",
       "projectName": "TempApp",
-      "projectPath": "/home/matt/DEV/PRDAT/Assignment 1/TempApp/TempApp.csproj",
-      "packagesPath": "/home/matt/.nuget/packages/",
-      "outputPath": "/home/matt/DEV/PRDAT/Assignment 1/TempApp/obj/",
+      "projectPath": "C:\\Users\\Tipskind_Overkill\\Documents\\Repositorier\\PRDAT\\Assignment 1\\TempApp\\TempApp.csproj",
+      "packagesPath": "C:\\Users\\Tipskind_Overkill\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Tipskind_Overkill\\Documents\\Repositorier\\PRDAT\\Assignment 1\\TempApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/matt/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Tipskind_Overkill\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "/usr/lib64/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -45,7 +44,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -66,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
