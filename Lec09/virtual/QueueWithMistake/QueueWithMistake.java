@@ -22,6 +22,21 @@
 // errata and online source code do not correct it.  But in all other
 // respects it is an extremely useful and recommendable book!
 
+
+//  Error:
+//  The error is that the queue keeps a permanent dummy field that points to the
+//  original first node, even after that node has been dequeued. The original first
+//  node's next chain still references all enqueued nodes, so they remain reachable
+//  and can't be garbage-collected.
+//
+//  Fix:
+//  This can be fixed by removing the dummy field entirely and instead initialize
+//  the head and tail to the same new sentinel node.
+//
+//  We also found another small fix, that could increase the efficiency of the
+//  garbage collector by setting first.next to null after updating the value of
+//  head resulting in us not keeping a long chain of nodes.
+
 class QueueWithMistake {
     private static volatile boolean monitoring = true;
 
