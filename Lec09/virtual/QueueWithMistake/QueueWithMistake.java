@@ -23,10 +23,38 @@
 // respects it is an extremely useful and recommendable book!
 
 class QueueWithMistake {
-  public static void main(String[] args) {
-    for (int threads=1; threads<20; threads++) 
-      runThreads(threads, new SentinelLockQueue());
-  }
+    private static volatile boolean monitoring = true;
+
+    public static void main(String[] args) {
+        // Start memory monitor thread
+        Thread monitorThread = new Thread(() -> {
+            while (monitoring) {
+                printMemoryUsage();
+                try {
+                    Thread.sleep(1000); // Update every second
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+        monitorThread.setDaemon(true);
+        monitorThread.start();
+
+        // Run the original test
+        for (int threads=1; threads<20; threads++)
+            runThreads(threads, new SentinelLockQueue());
+
+        monitoring = false; // Stop monitoring
+        printMemoryUsage(); // Final reading
+    }
+
+    private static void printMemoryUsage() {
+        Runtime runtime = Runtime.getRuntime();
+        long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024);
+        long maxMemory = runtime.maxMemory() / (1024 * 1024);
+        System.out.printf("Memory: %d MB / %d MB (%.1f%%)%n",
+                usedMemory, maxMemory, (usedMemory * 100.0 / maxMemory));
+    }
 
   private static void runThreads(final int threads, final Queue queue) {
     final int iterations = 200000000; // Increase this constant if program does not run out of memory.
@@ -55,7 +83,7 @@ class QueueWithMistake {
     } catch (Exception exn) {
       System.out.println(exn);
     }
-    System.out.printf("%-20s\t%4d\t%7.2f\t%s%n", 
+    System.out.printf("%-20s\t%4d\t%7.2f\t%s%n",
                       queue.getClass().getName(), threads, timer.Check(), queue.get());
   }
 }
