@@ -114,9 +114,13 @@ class SentinelLockQueue implements Queue {
     }
   }
 
-  private final Node dummy = new Node(-444, null);
-  private Node head = dummy, tail = dummy;
-  
+    // REMOVE OLD DUMMY NODE IMPLEMENTATION
+    //  private final Node dummy = new Node(-444, null);
+    //  private Node head = dummy, tail = dummy;
+
+    private Node head = new Node(-444, null); // Declare the first node directly in the head
+    private Node tail = head; // Reference the head as tail, since the single node is both head and tail
+
   public synchronized boolean put(int item) {
     Node node = new Node(item, null);
     tail.next = node;
@@ -128,7 +132,8 @@ class SentinelLockQueue implements Queue {
     if (head.next == null) 
       return -999;
     Node first = head;
-    head = first.next;
+    head = first.next; // here we update the value of head resulting in us not keeping a long chain of nodes
+    first.next = null; // help GC by unlinking the old head node
     return head.item;
   }
 }
