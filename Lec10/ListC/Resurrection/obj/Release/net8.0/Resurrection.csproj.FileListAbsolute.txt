@@ -1,0 +1,14 @@
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/bin/Release/net8.0/Resurrection
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/bin/Release/net8.0/Resurrection.deps.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/bin/Release/net8.0/Resurrection.runtimeconfig.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/bin/Release/net8.0/Resurrection.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/bin/Release/net8.0/Resurrection.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/Resurrection.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/Resurrection.AssemblyInfoInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/Resurrection.AssemblyInfo.cs
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/Resurrection.csproj.CoreCompileInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/Resurrection.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/refint/Resurrection.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/Resurrection.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/Resurrection.genruntimeconfig.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/Resurrection/obj/Release/net8.0/ref/Resurrection.dll

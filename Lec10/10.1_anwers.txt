@@ -1,0 +1,34 @@
+To understand how the abstract machine and the garbage collector work and how they collaborate, answer these questions:
+
+(i) Write 3-10 line descriptions of how the abstract machine executes each of the following instructions:
+• ADD, which adds two integers.
+• CSTI i, which pushes integer constant i.
+• NIL, which pushes a nil reference. What is the difference between NIL
+and CSTI 0?
+• IFZERO, which tests whether an integer is zero, or a reference is nil.
+• CONS, which creates a new pair (cell) in the heap.
+• CAR, which retrieves the first element of a pair.
+• SETCAR, which sets the first element of a pair.
+
+(ii) Describe the result of applying each C macro Length, Color and Paint from Sect. 10.7.4 to a block header
+ttttttttnnnnnnnnnnnnnnnnnnnnnngg,
+that is, a 32-bit word, as described in the source code comments.
+
+Answer:
+T are tag bits, n are length bits, and g are garbage collector color bits. The macro Length(hd) shifts 
+right by 2 and masks to extract the 23-bit length field, giving the block’s size in words. Color(hd) masks 
+with 3 to get the last two bits, representing the GC color (e.g., 00=white, 01=gray, 10=black). 
+Paint(hd, color) clears the last two bits and inserts a new color, changing only the GC mark bits 
+without affecting tag or length.
+
+(iii) When does the abstract machine, or more precisely, its instruction interpretation loop, call the allocate(...) function? 
+Is there any other interaction between the abstract machine (also called the mutator) and the garbage collector?
+
+Answer:
+The machine calls allocate(...) whenever an instruction needs a new heap block. If the heap is full, allocate(...) 
+triggers the garbage collector to reclaim unused memory.
+
+(iv) In what situation will the garbage collector’s collect(...) function be called?
+The garbage collector’s collect(...) function is called when the mutator requests a heap allocation via allocate(...) 
+and there is not enough free memory. The collector then scans for reachable objects, releases unreachable 
+ones, and updates the heap so that the allocation can proceed.
