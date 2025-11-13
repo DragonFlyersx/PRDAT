@@ -1,26 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/listc.fsproj": {}
+    "F:\\Udvikling\\PRDAT\\Lec10\\ListC\\listc.fsproj": {}
   },
   "projects": {
-    "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/listc.fsproj": {
+    "F:\\Udvikling\\PRDAT\\Lec10\\ListC\\listc.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/listc.fsproj",
+        "projectUniqueName": "F:\\Udvikling\\PRDAT\\Lec10\\ListC\\listc.fsproj",
         "projectName": "listc",
-        "projectPath": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/listc.fsproj",
-        "packagesPath": "/Users/nh/.nuget/packages/",
-        "outputPath": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/obj/",
+        "projectPath": "F:\\Udvikling\\PRDAT\\Lec10\\ListC\\listc.fsproj",
+        "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
+        "outputPath": "F:\\Udvikling\\PRDAT\\Lec10\\ListC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/nh/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/sdk/8.0.201/FSharp/library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\9.0.304\\FSharp\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -33,7 +33,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -42,7 +43,7 @@
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[8.0.200, )",
+              "version": "[9.0.303, )",
               "generatePathProperty": true
             }
           },
@@ -57,12 +58,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.19, 8.0.19]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.19, 8.0.19]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.19, 8.0.19]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.19, 8.0.19]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

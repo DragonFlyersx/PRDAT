@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "FSharp.Core/8.0.200": {
+      "FSharp.Core/9.0.303": {
         "type": "package",
         "compile": {
           "lib/netstandard2.1/FSharp.Core.dll": {
@@ -59,15 +59,15 @@
     }
   },
   "libraries": {
-    "FSharp.Core/8.0.200": {
-      "sha512": "qnxoF3Fu0HzfOeYdrwmQOsLP1v+OtOMSIYkNVUwf6nGqWzL03Hh4r6VFCvCb54jlsgtt3WADVYkKkrgdeY5kiQ==",
+    "FSharp.Core/9.0.303": {
+      "sha512": "6JlV8aD8qQvcmfoe/PMOxCHXc0uX4lR23u0fAyQtnVQxYULLoTZgwgZHSnRcuUHOvS3wULFWcwdnP1iwslH60g==",
       "type": "package",
-      "path": "fsharp.core/8.0.200",
+      "path": "fsharp.core/9.0.303",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "fsharp.core.8.0.200.nupkg.sha512",
+        "fsharp.core.9.0.303.nupkg.sha512",
         "fsharp.core.nuspec",
         "lib/netstandard2.0/FSharp.Core.dll",
         "lib/netstandard2.0/FSharp.Core.xml",
@@ -104,29 +104,29 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "FSharp.Core >= 8.0.200"
+      "FSharp.Core >= 9.0.303"
     ]
   },
   "packageFolders": {
-    "/Users/nh/.nuget/packages/": {}
+    "C:\\Users\\rasmu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/listc.fsproj",
+      "projectUniqueName": "F:\\Udvikling\\PRDAT\\Lec10\\ListC\\listc.fsproj",
       "projectName": "listc",
-      "projectPath": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/listc.fsproj",
-      "packagesPath": "/Users/nh/.nuget/packages/",
-      "outputPath": "/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec08/ListC/obj/",
+      "projectPath": "F:\\Udvikling\\PRDAT\\Lec10\\ListC\\listc.fsproj",
+      "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
+      "outputPath": "F:\\Udvikling\\PRDAT\\Lec10\\ListC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/nh/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/sdk/8.0.201/FSharp/library-packs": {},
+        "C:\\Program Files\\dotnet\\sdk\\9.0.304\\FSharp\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -139,7 +139,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -148,7 +149,7 @@
           "FSharp.Core": {
             "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
-            "version": "[8.0.200, )",
+            "version": "[9.0.303, )",
             "generatePathProperty": true
           }
         },
@@ -163,12 +164,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.19, 8.0.19]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.19, 8.0.19]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.19, 8.0.19]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.19, 8.0.19]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -470,21 +470,133 @@ void initheap() {
   freelist = &heap[0];
 }
 
+// Auxiliary function to recursively mark a block and all blocks reachable from it
+void mark(word* block) {
+  // Check if block is valid (non-null and within heap bounds)
+  if (block == 0 || !inHeap(block))
+    return;
+  
+  // Check if already marked (Grey or Black)
+  word hdr = block[0];
+  if (Color(hdr) != White)
+    return;  // Already marked or blue (on freelist)
+  
+  // Mark as Grey (being processed)
+  block[0] = Paint(hdr, Grey);
+  
+  // Get block tag and length
+  uword tag = BlockTag(hdr);
+  uword length = Length(hdr);
+  
+  // For cons cells (tag 0), recursively mark car and cdr
+  if (tag == CONSTAG && length == 2) {
+    // Mark car (block[1])
+    word car = block[1];
+    if (!IsInt(car) && car != 0) {
+      mark((word*)car);
+    }
+    
+    // Mark cdr (block[2])
+    word cdr = block[2];
+    if (!IsInt(cdr) && cdr != 0) {
+      mark((word*)cdr);
+    }
+  }
+  
+  // Mark as Black (fully processed)
+  block[0] = Paint(block[0], Black);
+}
+
 void markPhase(word s[], word sp) {
   printf("marking ...\n");
-  // TODO: Actually mark something
+  
+  // Scan the stack from bottom to top
+  word i;
+  for (i = 0; i <= sp; i++) {
+    word val = s[i];
+    
+    // If it's not an integer and not null, it's a heap reference
+    if (!IsInt(val) && val != 0) {
+      mark((word*)val);
+    }
+  }
 }
 
 void sweepPhase() {
   printf("sweeping ...\n");
-  // TODO: Actually sweep
+  
+  // Clear the freelist - we'll rebuild it
+  freelist = 0;
+  
+  // Scan through the entire heap
+  word* heapPtr = heap;
+  while (heapPtr < afterHeap) {
+    word hdr = heapPtr[0];
+    uword length = Length(hdr);
+    
+    // Skip orphan blocks (length 0)
+    if (length == 0) {
+      heapPtr++;
+      continue;
+    }
+    
+    word color = Color(hdr);
+    
+    if (color == White) {
+      // White blocks are dead. Try to join with adjacent white blocks
+      word* nextBlock = heapPtr + length + 1;
+      
+      // Keep joining adjacent white blocks
+      while (nextBlock < afterHeap) {
+        word nextHdr = nextBlock[0];
+        uword nextLength = Length(nextHdr);
+        
+        // Stop if we hit an orphan block
+        if (nextLength == 0) {
+          // Join the orphan into current block
+          length += 1;
+          nextBlock += 1;
+          continue;
+        }
+        
+        word nextColor = Color(nextHdr);
+        
+        // If next block is white, join it with current block
+        if (nextColor == White) {
+          length += nextLength + 1;  // Add next block's length + its header
+          nextBlock += nextLength + 1;
+        }
+        else {
+          // Next block is not white, stop joining
+          break;
+        }
+      }
+      
+      // Add the block to freelist
+      heapPtr[0] = mkheader(BlockTag(hdr), length, Blue);
+      heapPtr[1] = (word)freelist;
+      freelist = heapPtr;
+      
+      // Move past this block
+      heapPtr += length + 1;
+    }
+    else if (color == Black) {
+      // Black blocks are live. Paint them white for next GC
+      heapPtr[0] = Paint(hdr, White);
+      heapPtr += length + 1;
+    }
+    else {
+      // Blue blocks
+      heapPtr += length + 1;
+    }
+  }
 }
 
 void collect(word s[], word sp) {
-  markPhase(s, sp);
-  heapStatistics();
-  sweepPhase();
-  heapStatistics();
+  markPhase(s, sp); // Mark from stack
+  heapStatistics(); // Show heap after mark
+  sweepPhase();   // Sweep unmarked blocks
+  heapStatistics(); // Show heap after sweep
 }
 
 word* allocate(unsigned int tag, uword length, word s[], word sp) {

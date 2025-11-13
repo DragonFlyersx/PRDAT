@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="listc">
+    <resource name="FSharpSignatureData.listc" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedData.listc" action="remove"></resource>
+    <resource name="FSharpSignatureDataB.listc" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedDataB.listc" action="remove"></resource>
+    <resource name="FSharpOptimizationData.listc" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedData.listc" action="remove"></resource>
+    <resource name="FSharpOptimizationDataB.listc" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedDataB.listc" action="remove"></resource>
+    <resource name="FSharpOptimizationInfo.listc" action="remove"></resource>
+    <resource name="FSharpSignatureInfo.listc" action="remove"></resource>
+  </assembly>
+</linker>
