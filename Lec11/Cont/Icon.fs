@@ -35,7 +35,8 @@ type expr =
   | Or  of expr * expr
   | Seq of expr * expr
   | Every of expr 
-  | Fail;;
+  | Fail
+  | Prim1 of string * expr;;
 
 (* Runtime values and runtime continuations *)
 
@@ -99,6 +100,22 @@ let rec eval (e : expr) (cont : cont) (econt : econt) =
       eval e (fun _ -> fun econt1 -> econt1 ())
              (fun () -> cont (Int 0) econt)
     | Fail -> econt ()
+    | Prim1(ope, e1) ->
+        eval e1 (fun v1 -> fun econt1 ->
+          match (ope, v1) with
+          | ("sqr", Int i1) -> 
+              // Extract i1, square it, wrap back in Int
+              cont (Int(i1 * i1)) econt1
+          | ("even", Int i1) -> 
+              // Check i1, pass v1 (which is Int i1) if true
+              if i1 % 2 = 0 then cont v1 econt1
+              else econt1 ()
+          | ("multiples", Int i1) -> 
+              // Infinite loop generating multiples
+              let rec loop n () = 
+                  cont (Int(i1 * n)) (loop (n + 1))
+              loop 1 ()
+          | _ -> failwith ("unknown primitive or wrong type: " + ope)) econt
 
 let run e = eval e (fun v -> fun _ -> v) (fun () -> (printfn "Failed"; Int 0));
 
