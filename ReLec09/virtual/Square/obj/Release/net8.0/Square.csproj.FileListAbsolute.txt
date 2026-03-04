@@ -1,0 +1,14 @@
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/bin/Release/net8.0/Square
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/bin/Release/net8.0/Square.deps.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/bin/Release/net8.0/Square.runtimeconfig.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/bin/Release/net8.0/Square.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/bin/Release/net8.0/Square.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/Square.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/Square.AssemblyInfoInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/Square.AssemblyInfo.cs
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/Square.csproj.CoreCompileInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/Square.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/refint/Square.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/Square.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/Square.genruntimeconfig.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Square/obj/Release/net8.0/ref/Square.dll

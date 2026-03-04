@@ -1,0 +1,14 @@
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/bin/Debug/net8.0/Selsort
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/bin/Debug/net8.0/Selsort.deps.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/bin/Debug/net8.0/Selsort.runtimeconfig.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/bin/Debug/net8.0/Selsort.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/bin/Debug/net8.0/Selsort.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/Selsort.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/Selsort.AssemblyInfoInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/Selsort.AssemblyInfo.cs
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/Selsort.csproj.CoreCompileInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/Selsort.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/refint/Selsort.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/Selsort.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/Selsort.genruntimeconfig.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/Selsort/obj/Debug/net8.0/ref/Selsort.dll

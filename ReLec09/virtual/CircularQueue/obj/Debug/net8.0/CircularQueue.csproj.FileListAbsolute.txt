@@ -1,0 +1,14 @@
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/bin/Debug/net8.0/CircularQueue
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/bin/Debug/net8.0/CircularQueue.deps.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/bin/Debug/net8.0/CircularQueue.runtimeconfig.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/bin/Debug/net8.0/CircularQueue.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/bin/Debug/net8.0/CircularQueue.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/CircularQueue.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/CircularQueue.AssemblyInfoInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/CircularQueue.AssemblyInfo.cs
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/CircularQueue.csproj.CoreCompileInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/CircularQueue.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/refint/CircularQueue.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/CircularQueue.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/CircularQueue.genruntimeconfig.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/CircularQueue/obj/Debug/net8.0/ref/CircularQueue.dll

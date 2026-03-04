@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\rasmu\\.nuget\\packages\\": {}
+    "C:\\Users\\marcu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Udvikling\\PRDAT\\Assignment 1\\TempApp\\TempApp.csproj",
+      "projectUniqueName": "C:\\Users\\marcu\\Documents\\Repositorier\\PRDAT\\Assignment 1\\TempApp\\TempApp.csproj",
       "projectName": "TempApp",
-      "projectPath": "F:\\Udvikling\\PRDAT\\Assignment 1\\TempApp\\TempApp.csproj",
-      "packagesPath": "C:\\Users\\rasmu\\.nuget\\packages\\",
-      "outputPath": "F:\\Udvikling\\PRDAT\\Assignment 1\\TempApp\\obj\\",
+      "projectPath": "C:\\Users\\marcu\\Documents\\Repositorier\\PRDAT\\Assignment 1\\TempApp\\TempApp.csproj",
+      "packagesPath": "C:\\Users\\marcu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\marcu\\Documents\\Repositorier\\PRDAT\\Assignment 1\\TempApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rasmu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\marcu\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -43,8 +43,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net9.0": {
@@ -65,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

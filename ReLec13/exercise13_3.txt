@@ -1,0 +1,120 @@
+Exercise 13.3: Alpha Conversion
+
+Consider the example ex12.sml:
+
+begin
+  let val x = 2
+  in
+    let val x = 5
+    in
+      x + x
+    end
+  end
+end
+
+The two definitions of x makes a "hole" in the scope of the first
+declaration of x.
+
+Renaming variables such that all variable declarations are unique is
+called alpha conversion. It goes back to the mathematician Alonzo
+Church working with the lambda calculus in 1930's.
+
+The exercise is to implement alpha conversion such that all variable
+declarations will be unique. The function alphaConv has been prepared
+in the file Absyn.fs:
+
+(* Alpha conversion is implemented as an exercise.
+   Example ex11.sml does not work without alpha conversion. *)
+let alphaConv p : program<'a> = p
+
+To implement alpha conversion you need to keep track of the scope of
+variables similar to what we have done earlier, e.g., see Chapter
+2. You need an environment where you can map original variable names
+to new variable names. In below template we use a list of pairs
+(x_orig, x_new) where x_orig is the original variable name and x_new
+is the new. By using the list you can follow the lexical scoping of
+variables (FIFO). The function freshVar generates a new unique
+variable by concatenating a unique number to the original variable
+name. This is similar to generating unique type variables in the type
+inference algorithm, see Chapter 6.
+
+let alphaConv p : program<'a> =
+  let varNo = ref 0
+  let freshVar (x:string) = (varNo := !varNo+1;x + (!varNo).ToString())
+
+  let lookup (v:string) env : string =
+    match List.tryFind (fun (x,_) -> x=v) env with
+      None -> failwith ("alphaConv: Can't lookup variable " + v)
+    | Some (_,v') -> v'
+
+  let rec aExpr env e =
+    match e with
+    | CstI _ -> ...
+    ...
+  and aValdec' env = function
+    | Valdec(x,eRhs) -> ...
+    ...
+  and aProg' = function
+    | Prog (valdecs,body) -> ...
+  aProg' p
+
+The function alphaConv will by default be called as the first pass
+over the abstract syntax, see function compProg' in file
+ParseTypeAndRun.fs. A compiler option -noAlpha has been introduced to
+skip this step. Using -noAlpha you can compile with and without alpha
+conversion and see the difference. If you use the compiler option
+-verbose you get a pretty print of the intermediate abstract syntax.
+
+EXAMPLE: Compiling ex12.sml with alpha conversion:
+
+$ dotnet run -verbose ex12.sml 
+Micro-SML compiler v 1.1 of 2018-11-18
+Compiling ex12.sml to ex12.out
+
+Program after alpha conversion (exercise):
+
+begin
+  
+    let
+      val x1 = 2
+    in
+      
+      let
+        val x2 = 5
+      in
+        (x2 + x2)
+      end
+    end
+end
+
+EXAMPLE: Compiling ex12.sml without alpha conversion:
+
+$ dotnet run -noAlpha -verbose ex12.sml 
+Micro-SML compiler v 1.1 of 2018-11-18 
+Compiling ex12.sml to ex12.out
+
+Program with types:
+
+begin
+  
+    let
+      val x = 2:int
+    in
+      
+      let
+        val x = 5:int
+      in
+        (x:int + x:int):int
+      end
+    end
+end
+
+Your task is to
+
+  a) Implement the function alphaConv. Using the template is optional.
+
+  b) Compile and run example ex11.sml. By inspecting the abstract
+  syntax, verify that alpha conversion gives the expected
+  result. Verify that you can run the program with expected result.
+
+

@@ -1,0 +1,14 @@
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/bin/Debug/net8.0/StringConcatSpeed
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/bin/Debug/net8.0/StringConcatSpeed.deps.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/bin/Debug/net8.0/StringConcatSpeed.runtimeconfig.json
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/bin/Debug/net8.0/StringConcatSpeed.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/bin/Debug/net8.0/StringConcatSpeed.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/StringConcatSpeed.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/StringConcatSpeed.AssemblyInfoInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/StringConcatSpeed.AssemblyInfo.cs
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/StringConcatSpeed.csproj.CoreCompileInputs.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/StringConcatSpeed.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/refint/StringConcatSpeed.dll
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/StringConcatSpeed.pdb
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/StringConcatSpeed.genruntimeconfig.cache
+/Users/nh/Library/CloudStorage/Dropbox/Documents/Work/ITU/Course/BPRD-E2024/Lectures/Lec07/virtual/StringConcatSpeed/obj/Debug/net8.0/ref/StringConcatSpeed.dll
