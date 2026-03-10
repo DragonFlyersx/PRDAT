@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TempApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d0791c328121a2d3e07052b00ddb4c222c6fa45")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b24362ab5cd189c6e5bae16fc706b01087b4d9b")]
 [assembly: System.Reflection.AssemblyProductAttribute("TempApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TempApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

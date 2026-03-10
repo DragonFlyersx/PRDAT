@@ -10,7 +10,8 @@ module Intcomp1
 type expr = 
   | CstI of int
   | Var of string
-  | Let of string * expr * expr
+  | Let of (string * expr) list * expr
+  //changed from string * expr * expr
   | Prim of string * expr * expr;;
 
 (* Some closed expressions: *)
@@ -49,10 +50,39 @@ let rec eval e (env : (string * int) list) : int =
     match e with
     | CstI i            -> i
     | Var x             -> lookup env x 
-    | Let(x, erhs, ebody) -> 
+    | Let(pairList, ebody) -> 
+        match pairList with
+        | [] -> eval ebody env
+        | (x, erhs) :: rest ->
+              let xval = eval erhs env
+              let env1 = (x, xval) :: env
+              eval (Let(rest, ebody)) env1
+(*                
       let xval = eval erhs env
       let env1 = (x, xval) :: env 
       eval ebody env1
+
+Normally we would evaluate the erhs expressions in the original environment, 
+and then evaluate the ebody in the extended environment.  
+But here we have a list of bindings, so we need to extend the environment with each binding before evaluating the next one.  
+So we evaluate the first erhs in env, then extend env with that binding, 
+then evaluate the second erhs in that extended environment, 
+and so on until we have processed all the bindings.  
+Then we evaluate ebody in the final extended environment.  
+The code above does this by recursively processing the list of bindings.
+
+another way to do it:
+    | Let(bindings, ebody) ->
+        let rec evalBindings bs env =     // recursive function to evaluate all bindings
+            match bs with // Match on the list of bindings
+            | [] -> env // If no bindings left, return the current environment
+            | (x, erhs) :: rest -> // Else split the first binding from the rest
+                let xval = eval erhs env // Evaluate the right-hand side expression of the binding
+                evalBindings rest ((x, xval) :: env) // Recursively evaluate remaining bindings with updated environment
+        let newEnv = evalBindings bindings env // Evaluate all bindings to get the new environment
+        eval ebody newEnv // Evaluate the body of the let expression in the new environment
+
+*)
     | Prim("+", e1, e2) -> eval e1 env + eval e2 env
     | Prim("*", e1, e2) -> eval e1 env * eval e2 env
     | Prim("-", e1, e2) -> eval e1 env - eval e2 env
@@ -212,8 +242,43 @@ let rec freevars e : string list =
     match e with
     | CstI i -> []
     | Var x  -> [x]
+    | Let(pairList, ebody) -> 
+        // Collect the variable names introduced by this let.
+        let boundVars = List.map fst pairList
+        // Union together free variables from every right-hand side expression.
+        let freeInRHSs = List.fold (fun acc (_, erhs) -> union(acc, freevars erhs)) [] pairList
+        // Compute free variables of the let body.
+        let freeInBody = freevars ebody
+        // Body free vars excluding bound names, then union with RHS free vars.
+        union(freeInRHSs, minus(freeInBody, boundVars))
+(*
     | Let(x, erhs, ebody) -> 
           union (freevars erhs, minus (freevars ebody, [x]))
+
+We have 3 sets of variables to consider:
+1. The variables that are bound by the let expression itself (the variable names introduced by the
+    example: in Let("x", CstI 3, Prim("+", Var "x", Var "z")), the variable "x" is bound by the let expression.
+
+2. The variables that are free in the right-hand side expressions of the let bindings.
+    example: in Let("x", Prim("+", Var "y", CstI 3), Var "x"), the free variables in the right-hand side expression Prim("+", Var "y", CstI 3) is just ["y"].
+
+3. The variables that are free in the body of the let expression.
+    example: in Let("x", CstI 3, Prim("+", Var "x", Var "z")), the free variables in the body Prim("+", Var "x", Var "z") is ["x"; "z"].
+
+Question: How do we combine these sets to get the free variables of the whole let expression?
+Answer: The free variables of the whole let expression is the union of:
+- The free variables in the right-hand side expressions (set 2)
+- The free variables in the body (set 3) excluding the variables that are bound by the let expression (set 1)
+
+Question: Why do List.fold ignore the bound variable names when collecting free variables from the right-hand side expressions?
+Answer: Because the bound variable names only affect the body of the let expression, 
+not the right-hand side expressions. The right-hand side expressions are evaluated in the original environment, 
+so they can **refer to any variables that are free in them, including the bound variable names.** 
+However, the body of the let expression is evaluated in an extended environment where the bound variable names are now bound, 
+so any free occurrences of those names in the body should not be considered free in the whole let expression. 
+That's why we need to exclude the bound variable names from the free variables of the body when computing the free variables of the whole let expression.
+
+*)
     | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
 
 (* Alternative definition of closed *)
@@ -246,9 +311,21 @@ let rec tcomp (e : expr) (cenv : string list) : texpr =
     match e with
     | CstI i -> TCstI i
     | Var x  -> TVar (getindex cenv x)
-    | Let(x, erhs, ebody) -> 
-      let cenv1 = x :: cenv 
-      TLet(tcomp erhs cenv, tcomp ebody cenv1)
+    | Let(PairList, ebody) -> 
+        match PairList with
+        | [] -> tcomp ebody cenv
+        | (x, erhs) :: rest ->
+                let erhsComp = tcomp erhs cenv
+                let cenv1 = x :: cenv 
+                let ebodyComp = tcomp (Let(rest, ebody)) cenv1 // Let(rest, ebody) is the remaining let expression with the rest of the bindings and the same body
+                TLet(erhsComp, ebodyComp)    
+
+(*    
+    | Let(x, erhs, ebody) ->
+        let cenv1 = x :: cenv 
+        TLet(tcomp erhs cenv, tcomp ebody cenv1)
+
+*)
     | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);;
 
 (* Evaluation of target expressions with variable indexes.  The
