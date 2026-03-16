@@ -287,33 +287,9 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) (C : instr list) : inst
             | "<="  -> SWAP :: LT :: addNOT C
             | _     -> failwith "unknown primitive 2"))
     | Andalso(e1, e2) ->
-      match C with
-      | IFZERO lab :: _ ->
-         cExpr e1 varEnv funEnv (addIFZERO lab (cExpr e2 varEnv funEnv C))
-      | IFNZRO labthen :: C1 -> 
-        let (labelse, C2) = addLabel C1
-        cExpr e1 varEnv funEnv
-           (addIFZERO labelse (cExpr e2 varEnv funEnv (IFNZRO labthen :: C2)))
-      | _ ->
-        let (jumpend,  C1) = makeJump C
-        let (labfalse, C2) = addLabel (addCST 0 C1)
-        cExpr e1 varEnv funEnv
-          (addIFZERO labfalse (cExpr e2 varEnv funEnv (addJump jumpend C2)))
+      cExpr (Cond(e1, e2, CstI 0)) varEnv funEnv C
     | Orelse(e1, e2) -> 
-      match C with
-      | IFNZRO lab :: _ -> 
-        cExpr e1 varEnv funEnv (IFNZRO lab :: cExpr e2 varEnv funEnv C)
-      | IFZERO labthen :: C1 ->
-        let(labelse, C2) = addLabel C1
-        cExpr e1 varEnv funEnv
-           (IFNZRO labelse :: cExpr e2 varEnv funEnv
-             (addIFZERO labthen C2))
-      | _ ->
-        let (jumpend, C1) = makeJump C
-        let (labtrue, C2) = addLabel(addCST 1 C1)
-        cExpr e1 varEnv funEnv
-           (IFNZRO labtrue 
-             :: cExpr e2 varEnv funEnv (addJump jumpend C2))
+      cExpr (Cond(e1, CstI 1, e2)) varEnv funEnv C
     | Call(f, es) -> callfun f es varEnv funEnv C
     | Cond(e1, e2, e3) ->
       let (jumpend, C1) = makeJump C                                
