@@ -84,26 +84,33 @@ let addJump jump C =                    (* jump is GOTO or RET *)
                                       else GOTO lab1 :: C1
     | _                            -> jump :: C1
     
-let addGOTO lab C =
-    addJump (GOTO lab) C
+let addGOTO lab C = addJump (GOTO lab) C
 
+// Add code to push constant i on stack, but optimize if followed by operations that can be simplified with the constant
 let rec addCST i C =
     match (i, C) with
-    | (0, ADD        :: C1) -> C1
-    | (0, SUB        :: C1) -> C1
-    | (0, NOT        :: C1) -> addCST 1 C1
-    | (_, NOT        :: C1) -> addCST 0 C1
-    | (1, MUL        :: C1) -> C1
-    | (1, DIV        :: C1) -> C1
-    | (0, EQ         :: C1) -> addNOT C1
-    | (_, INCSP m    :: C1) -> if m < 0 then addINCSP (m+1) C1
-                               else CSTI i :: C
-    | (0, IFZERO lab :: C1) -> addGOTO lab C1
-    | (_, IFZERO lab :: C1) -> C1
-    | (0, IFNZRO lab :: C1) -> C1
-    | (_, IFNZRO lab :: C1) -> addGOTO lab C1
-    | _                     -> CSTI i :: C
-            
+    | (0, ADD                            :: C1) -> C1
+    | (0, SUB                            :: C1) -> C1
+    | (0, NOT                            :: C1) -> addCST 1 C1
+    | (_, NOT                            :: C1) -> addCST 0 C1
+    | (1, MUL                            :: C1) -> C1
+    | (1, DIV                            :: C1) -> C1
+    | (0, EQ                             :: C1) -> addNOT C1
+    | (_, INCSP m                        :: C1) -> if m < 0 then addINCSP (m+1) C1 else CSTI i :: C
+    | (0, IFZERO lab                     :: C1) -> addGOTO lab C1
+    | (_, IFZERO lab                     :: C1) -> C1
+    | (0, IFNZRO lab                     :: C1) -> C1
+    | (_, IFNZRO lab                     :: C1) -> addGOTO lab C1
+    // Constant-fold comparisons when both operands are constants.
+    // This also lets later IFZERO/IFNZRO and NOT optimizations fire.
+    | _, (CSTI j :: EQ                   :: C1) -> addCST (if i = j then 1 else 0) C1
+    | _, (CSTI j :: LT                   :: C1) -> addCST (if i < j then 1 else 0) C1
+    | _, (CSTI j :: SWAP :: LT           :: C1) -> addCST (if i > j then 1 else 0) C1
+    | _                                         -> CSTI i :: C
+
+// Question: Which byte codes represents: != Answer: Prim2("!=", e1, e2) compiles to cExpr e1 varEnv funEnv (cExpr e2 varEnv funEnv (EQ :: addNOT C))
+// Question: Is this case redundant?: (CSTI j :: EQ :: addNot :: C1): No, because the addNOT may be optimized away by addNOT C1, if it is followed by another NOT or IFZERO or IFNZRO, etc.
+
 
 // IFZERO L3; GOTO L2; Label L3; ....
 // improves to:
