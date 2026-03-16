@@ -313,6 +313,12 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) (C : instr list) : inst
            (IFNZRO labtrue 
              :: cExpr e2 varEnv funEnv (addJump jumpend C2))
     | Call(f, es) -> callfun f es varEnv funEnv C
+    | Cond(e1, e2, e3) ->
+      let (jumpend, C1) = makeJump C
+      let (labelse, C2) = addLabel C1
+      cExpr e1 varEnv funEnv 
+        (addIFZERO labelse 
+           (cExpr e2 varEnv funEnv (addJump jumpend (cExpr e3 varEnv funEnv C2))))
 
 (* Generate code to access variable, dereference pointer or index array: *)
 
