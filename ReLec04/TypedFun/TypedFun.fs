@@ -39,6 +39,12 @@ type typ =
   | TypF of typ * typ                   (* (argumenttype, resulttype)  *)
 
 (* New abstract syntax with explicit types, instead of Absyn.expr: *)
+(* Purpose of explicit types is:
+    - to make type checking easier to implement, and to test it on
+      examples before we implement type inference next week
+    - to make the examples more readable, and to show the difference
+      between the explicitly typed and implicitly typed languages. *)
+
 
 type tyexpr = 
   | CstI of int
@@ -82,15 +88,15 @@ let rec eval (e : tyexpr) (env : value env) : int =
     | If(e1, e2, e3) -> 
       let b = eval e1 env
       if b<>0 then eval e2 env else eval e3 env
-    | Letfun(f, x, _, fBody, _, letBody) -> 
+    | Letfun(f, x, _, fBody, _, letBody) ->                         // Letfun is like Let, but the function name is bound in the function body as well as in the let body; the type annotations are ignored by the evaluator, but are used by the type checker
       let bodyEnv = (f, Closure(f, x, fBody, env)) :: env 
       eval letBody bodyEnv
-    | Call(Var f, eArg) -> 
+    | Call(Var f, eArg) ->                                          //  aArg is: the argument expression; the function name must be a variable, not an arbitrary expression, because we do not allow higher-order functions in this language
       let fClosure = lookup env f
       match fClosure with
       | Closure (f, x, fBody, fDeclEnv) ->
         let xVal = Int(eval eArg env)
-        let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
+        let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv       // xVal is the value of the argument; fClosure is the closure for the function being called; the function body environment extends the function declaration environment with the bindings for the function name and the parameter name
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
     | Call _ -> failwith "illegal function in Call"

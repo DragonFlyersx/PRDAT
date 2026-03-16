@@ -70,6 +70,8 @@ val it: Machine.instr list =
    Label "L3"; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 0; ADD; LDI; LT;
    IFNZRO "L2"; INCSP -1; RET 0]
    
+how loops and conditionals interact?   
+
 ANSWER:
 
 ---- Loop ----

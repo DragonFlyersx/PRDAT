@@ -26,6 +26,8 @@ type value =
   | Int of int
   | Closure of string * string list * expr * value env       (* (f, [x], fBody, fDeclEnv) *)
 
+// A Closure is a tuple of the function name, the list of parameter names, the function body, and the environment at the point of function declaration. The environment is needed to support static scoping.
+
 let rec eval (e : expr) (env : value env) : int =
     match e with 
     | CstI i -> i
@@ -65,11 +67,28 @@ let rec eval (e : expr) (env : value env) : int =
                     failwith ("function " + f + " expects " + string(List.length xs) + " arguments, got " + string(List.length eArgs))
                 else
                     let argValues = List.map (fun eArg -> Int(eval eArg env)) eArgs
-                    let paramBindings = List.zip xs argValues
-                    let fBodyEnv = paramBindings @ (f, fClosure) :: fDeclEnv
-                    eval fBody fBodyEnv
+                    let paramBindings = List.zip xs argValues // Create a list of parameter bindings by zipping the parameter names with the argument values. 
+                    let fBodyEnv = paramBindings @ (f, fClosure) :: fDeclEnv // The function body environment extends the function declaration environment with the bindings for the function name and the parameter names. The parameter bindings are added first to ensure that they shadow any bindings in the declaration environment.
+                    eval fBody fBodyEnv 
             | _ -> failwith "eval Call: not a function"
         | _ -> failwith "eval Call: not first-order function"
+
+// Different environments explainted:
+
+// The function declaration environment (fDeclEnv) is the environment that was in effect at the point where the function was declared. 
+// This environment is captured in the closure when the function is defined. It is used to support static scoping, 
+// which means that a function can access variables that were in scope at the point of its declaration, 
+// even if it is called from a different environment.
+
+// The function body environment (fBodyEnv) is the environment that is used when evaluating the function body. 
+// It is created by extending the function declaration environment with the bindings for the function name and the parameter names. 
+// This environment is used to evaluate the function body when the function is called.
+
+// The let body environment (bodyEnv) is the environment that is used when evaluating the body of a let expression. 
+// It is created by extending the current environment with the binding for the variable defined in the let expression. 
+// This environment is used to evaluate the let body, 
+// and it is also used to create the function body environment when a function is defined within a let expression.
+
 
 (* Evaluate in empty environment: program must have no free variables: *)
 

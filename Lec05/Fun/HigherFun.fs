@@ -32,7 +32,7 @@ type value =
   | Closure of string * string * expr * value env       (* (f, x, fBody, fDeclEnv) *)
   | Clos of string * expr * value env                   (* (x,body,declEnv) *)
 
-let rec eval (e : expr) (env : value env) : value =
+let rec eval (e : expr) (env : value env) : value = // The return type is value, not int, because the value of an expression may be a function closure.
     match e with
     | CstI i -> Int i
     | CstB b -> Int (if b then 1 else 0)
@@ -73,6 +73,17 @@ let rec eval (e : expr) (env : value env) : value =
       | _ -> failwith "eval Call: not a function"
     | Fun(x, fBody) -> 
       Clos(x, fBody, env)
+
+// Deference between letfun anf fun:
+// letfun f x = e1 in e2 end
+//   - f is the name of the function, and is bound to the function closure in the body e2, but not in the function body e1. 
+//   This means that the function is recursive, but not mutually recursive. 
+//   The function body e1 can only call itself, but not other functions defined in the same letfun.
+// fun x -> e1
+//   - The function is anonymous, and can only be called through a variable that is bound to the function closure. 
+//   The function body e1 can call other functions defined in the same letfun, but not itself. 
+//   The function is not recursive, but can be mutually recursive with other functions defined in the same letfun.
+
 
 (* Evaluate in empty environment: program must have no free variables: *)
 

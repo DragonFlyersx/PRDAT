@@ -228,15 +228,17 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) : instr list =
       @ [GOTO labend; Label labtrue; CSTI 1; Label labend]
     | Call(f, es) -> callfun f es varEnv funEnv
     | PreInc acc ->
-      cAccess acc varEnv funEnv @ [DUP; LDI; CSTI 1; ADD; STI; LDI]
+      cAccess acc varEnv funEnv @ [DUP; LDI; CSTI 1; ADD; STI; LDI] // stack effect: push new value of acc on stack top, but leave old value of acc below it on stack, so that the expression has the value of acc before incrementing it.
     | PreDec acc ->
       cAccess acc varEnv funEnv @ [DUP; LDI; CSTI 1; SUB; STI; LDI]
     | Cond(e1, e2, e3) ->
         let labelse = newLabel()
         let labend  = newLabel()
-        cExpr e1 varEnv funEnv
-        @ [IFZERO labelse]
-        @ cExpr e2 varEnv funEnv
+        cExpr e1 varEnv funEnv                                      // stack effect: push value of e1 on stack top
+        @ [IFZERO labelse]                                          // stack effect: remove value of e1 from stack, but if it is zero then jump to labelse
+        @ cExpr e2 varEnv funEnv                                    // stack effect: push value of e2 on stack top, but remove value of e1 from stack
+                                                                    // Note: the result of e1 will sit below the result of either e2 or e3 on the stack.
+                                                                    // The result of e1 will remain on the stack until we jump to labend, but it will not be used after that, so it will not interfere with the result of e2 or e3.
         @ [GOTO labend; Label labelse]
         @ cExpr e3 varEnv funEnv
         @ [Label labend]

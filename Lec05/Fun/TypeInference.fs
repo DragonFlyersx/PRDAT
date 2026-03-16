@@ -242,11 +242,11 @@ type tenv = typescheme env
 (* Type inference helper function:
    (typ lvl env e) returns the type of e in env at level lvl *)
 
-let rec typ (lvl : int) (env : tenv) (e : expr) : typ =
+let rec typ (lvl : int) (env : tenv) (e : expr) : typ = // lvl is the current level of nesting of let and letfun expressions.  It is used to determine which type variables to generalize when typing a let expression.  The type variables that are created at a level higher than lvl are generalized, and those that are created at a level lower than or equal to lvl are not generalized.  This is because the type variables that are created at a level higher than lvl may be instantiated to different types in different branches of the program, and therefore need to be generalized to allow for polymorphism.  The type variables that are created at a level lower than or equal to lvl are not generalized because they are not polymorphic, and can only be instantiated to one type.
     match e with
     | CstI i -> TypI
     | CstB b -> TypB
-    | Var x  -> specialize lvl (lookup env x)
+    | Var x  -> specialize lvl (lookup env x)  // The type of a variable is the specialization of the type scheme found in the environment
     | Prim(ope, e1, e2) ->
       let _ = debug ("Type Prim on e1: " + (showTEnv env))      
       let t1 = typ lvl env e1
