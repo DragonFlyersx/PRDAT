@@ -255,6 +255,8 @@ and bStmtordec stmtOrDec varEnv : bstmtordec * varEnv =
    actually achieve this in a different way.
  *)
 
+
+// varEnv and funEnv are only used for looking up variables and functions, so they are not modified by cExpr, but they are passed along to the recursive calls to cExpr and cAccess, and to callfun, so that they can be used for looking up variables and functions in those calls. The code C is modified by cExpr to generate the appropriate instructions for evaluating the expression e, and then it is passed along to the recursive calls to cExpr and cAccess, and to callfun, so that they can generate the appropriate instructions for evaluating their sub-expressions and accessing variables, and then execute the code C after that.
 and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) (C : instr list) : instr list =
     match e with
     | Access acc     -> cAccess acc varEnv funEnv (LDI :: C)
@@ -314,11 +316,36 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) (C : instr list) : inst
              :: cExpr e2 varEnv funEnv (addJump jumpend C2))
     | Call(f, es) -> callfun f es varEnv funEnv C
     | Cond(e1, e2, e3) ->
-      let (jumpend, C1) = makeJump C
-      let (labelse, C2) = addLabel C1
+      let (jumpend, C1) = makeJump C                                
+      let (labelse, C2) = addLabel (cExpr e3 varEnv funEnv C1)     
       cExpr e1 varEnv funEnv 
         (addIFZERO labelse 
-           (cExpr e2 varEnv funEnv (addJump jumpend (cExpr e3 varEnv funEnv C2))))
+           (cExpr e2 varEnv funEnv (addJump jumpend C2)))
+
+// Question: What is the difference between an expr cond and a statement if? 
+// Answer: An expr cond is an expression that evaluates to a value, 
+// whereas a statement if does not evaluate to a value. In the compilation, this means that for a cond expression, 
+// we need to ensure that the code we generate leaves the result of the expression on the stack, 
+// while for an if statement, we do not need to worry about leaving a value on the stack.
+
+// Explanation: Cond stack effect per line.
+// cExpr e1 varEnv funEnv 
+//   (addIFZERO labelse 
+//      (cExpr e2 varEnv funEnv (addJump jumpend C2)))
+// 1. cExpr e1 varEnv funEnv ... leaves the value of e1 on the stack top.
+// 2. addIFZERO labelse ... will generate code that tests the value of e1 on the stack top, 
+// and if it is zero, it will jump to labelse, otherwise it will continue with the next instruction.
+// 3. If e1 is zero, we jump to labelse, which is the code for e3, 
+// and we want to ensure that the value of e3 is left on the stack top, 
+// which is achieved by cExpr e3 varEnv funEnv C1, where C1 is the code that follows the cond expression.
+// 4. If e1 is not zero, we continue with the next instruction, which is cExpr e2 varEnv funEnv (addJump jumpend C2). 
+// This will evaluate e2 and leave its value on the stack top, 
+// and then addJump jumpend C2 will generate code that will jump to jumpend, 
+// which is the code that follows the cond expression, after the code for e3. 
+// This ensures that the value of e2 is left on the stack top if e1 is not zero, 
+// and the value of e3 is left on the stack top if e1 is zero, and in both cases, 
+// we will jump to the code that follows the cond expression after evaluating the appropriate branch.
+
 
 (* Generate code to access variable, dereference pointer or index array: *)
 
